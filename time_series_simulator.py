@@ -2,9 +2,10 @@ import random
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-
+from abc import ABC, abstractmethod
+import yaml
 from sklearn.preprocessing import MinMaxScaler
-
+import itertools
 random.seed(22)
 
 
@@ -175,93 +176,98 @@ def add_outliers(data, percentage_outliers=0.05):
 
 
 def main():
-    # Define simulation parameters
-    start_date = datetime(2021, 7, 1)
-    frequencies = ["1D", "10T", "30T", "1H", "6H", "8H"]
-    daily_seasonality_options = ["no", "exist"]
-    weekly_seasonality_options = ["exist", "no"]
-    noise_levels = ["small"]  # , "large"]
-    trend_levels = ["exist", "no"]
-    cyclic_periods = ["exist", "no"]
-    data_types = [""
-                  "", "additive"]
-    percentage_outliers_options = [0.05]  # , 0]
-    data_sizes = [60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365]
     meta_data = []
     counter = 0
-    # for freq in frequencies:
-    for daily_seasonality in daily_seasonality_options:
-        for weekly_seasonality in weekly_seasonality_options:
-            for noise_level in noise_levels:
-                for trend in trend_levels:
-                    for cyclic_period in cyclic_periods:
-                        for percentage_outliers in percentage_outliers_options:
-                            for data_type in data_types:
-                                for _ in range(16):
-                                    # for data_size in data_sizes:
-                                    data_size = random.choice(data_sizes)
-                                    freq = random.choice(frequencies)
-                                    counter += 1
-                                    file_name = f"TimeSeries_daily_{daily_seasonality}_weekly_{weekly_seasonality}_noise_{noise_level}_trend_{trend}_cycle_{cyclic_period}_outliers_{int(percentage_outliers * 100)}%_freq_{freq}_size_{data_size}Days.csv"
-                                    print(f"File '{file_name}' generated.")
-                                    # Generate time index
-                                    date_rng = generate_time_series(start_date, start_date + timedelta(days=data_size),
-                                                                    freq)
-                                    # Create components
-                                    daily_seasonal_component = add_daily_seasonality(date_rng, daily_seasonality,
-                                                                                     season_type=data_type)
-                                    weekly_seasonal_component = add_weekly_seasonality(date_rng, weekly_seasonality,
-                                                                                       season_type=data_type)
-                                    trend_component = add_trend(date_rng, trend, data_size=data_size,
-                                                                data_type=data_type)
-                                    cyclic_period = "exist"
-                                    cyclic_component = add_cycles(date_rng, cyclic_period, season_type=data_type)
+    with open('config.yml', 'r') as config_file:
+        config = yaml.safe_load(config_file)
 
-                                    # Combine components and add missing values and outliers
-                                    if data_type == 'multiplicative':
-                                        data = daily_seasonal_component * weekly_seasonal_component * trend_component * cyclic_component
-                                    else:
-                                        data = daily_seasonal_component + weekly_seasonal_component + trend_component + cyclic_component
-                                    # Create a MinMaxScaler instance
-                                    scaler = MinMaxScaler(feature_range=(-1, 1))
-                                    data = scaler.fit_transform(data.values.reshape(-1, 1))
-                                    data = add_noise(data, noise_level)
-                                    data, anomaly = add_outliers(data, percentage_outliers)
-                                    data = add_missing_values(data, 0.05)
+    start_date = config['simulation_parameters']['start_date']
+    end_date = config['simulation_parameters']['end_date']
+    frequencies = config['simulation_parameters']['frequencies']
+    daily_seasonality_options = config['simulation_parameters']['daily_seasonality_options']
+    weekly_seasonality_options = config['simulation_parameters']['weekly_seasonality_options']
+    noise_levels = config['simulation_parameters']['noise_levels']
+    trend_levels = config['simulation_parameters']['trend_levels']
+    cyclic_periods = config['simulation_parameters']['cyclic_periods']
+    data_types = config['simulation_parameters']['data_types']
+    noise_percentage = config['simulation_parameters']['noise_percentage']
+    outliers_percentage = config['simulation_parameters']['outliers_percentage']
+    num_datasets = config['simulation_parameters']['num_datasets']
+    data_sizes = config['simulation_parameters']['data_sizes']
+    simulation_parameters = list(itertools.product(
+        daily_seasonality_options,
+        weekly_seasonality_options,
+        noise_levels,
+        trend_levels,
+        cyclic_periods,
+        outliers_percentage,
+        data_types,
+        range(num_datasets)
+    ))
+  
+    for (daily_seasonality, weekly_seasonality, noise_level, trend,
+        cyclic_period, percentage_outliers, data_type, datasets) in simulation_parameters:
+        data_size = random.choice(data_sizes)
+        freq = random.choice(frequencies)
+        counter += 1
+        file_name = f"TimeSeries_daily_{daily_seasonality}_weekly_{weekly_seasonality}_noise_{noise_level}_trend_{trend}_cycle_{cyclic_period}_outliers_{int(percentage_outliers * 100)}%_freq_{freq}_size_{data_size}Days.csv"
+        print(f"File '{file_name}' generated.")
+        # Generate time index
+        date_rng = generate_time_series(start_date, end_date, freq)
+        # Create components
+        daily_seasonal_component = add_daily_seasonality(date_rng, daily_seasonality, season_type=data_type)
+        weekly_seasonal_component = add_weekly_seasonality(date_rng, weekly_seasonality, season_type=data_type)
+        trend_component = add_trend(date_rng, trend, data_size=data_size, data_type=data_type)
+        cyclic_component = add_cycles(date_rng, cyclic_period, season_type=data_type)
 
-                                    # Save the data to a CSV file
-                                    df = pd.DataFrame({'value': data, 'timestamp': date_rng, 'anomaly': anomaly})
-                                    df.to_csv('sample_datasets/' + str(counter) + '.csv', encoding='utf-8', index=False)
+        # Combine components and add missing values and outliers
+        if data_type == 'multiplicative':
+            data = daily_seasonal_component * weekly_seasonal_component * trend_component * cyclic_component
+        else:
+            data = daily_seasonal_component + weekly_seasonal_component + trend_component + cyclic_component
+        # Create a MinMaxScaler instance
+        scaler = MinMaxScaler(feature_range=(-1, 1))
+        data = scaler.fit_transform(data.values.reshape(-1, 1))
+        data = add_noise(data, noise_level)
+        data, anomaly = add_outliers(data, percentage_outliers)
+        data = add_missing_values(data, 0.05)
 
-                                    """
-                                    import matplotlib.pyplot as plt
-                                    plt.figure(figsize=(10, 6))
-                                    # Plot the time series data
-                                    plt.plot(df['timestamp'], df['value'], marker='o', linestyle='-', color='b',
-                                             label='Time Series Data')
-                                    # Add labels and title
-                                    plt.xlabel('Time')
-                                    plt.ylabel('Value')
-                                    plt.title('Time Series Plot')
-                                    plt.legend()
-                                    # Display the plot
-                                    plt.tight_layout()
-                                    plt.show()
-                                    break
-                                    """
+        # Save the data to a CSV file
+        df = pd.DataFrame({'value': data, 'timestamp': date_rng, 'anomaly': anomaly})
+        df.to_csv('sample_datasets/' + str(counter) + '.csv', encoding='utf-8', index=False)
 
-                                    meta_data.append({'id': str(counter) + '.csv',
-                                                      'data_type': data_type,
-                                                      'daily_seasonality': daily_seasonality,
-                                                      'weekly_seasonality': weekly_seasonality,
-                                                      'noise (high 30% - low 10%)': noise_level,
-                                                      'trend': trend,
-                                                      'cyclic_period (3 months)': cyclic_period,
-                                                      'data_size': data_size,
-                                                      'percentage_outliers': percentage_outliers,
-                                                      'percentage_missing': 0.05,
-                                                      'freq': freq})
-                                    # generate_csv(list(zip(date_rng, data)), file_name)
+        """
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(10, 6))
+        # Plot the time series data
+        plt.plot(df['timestamp'], df['value'], marker='o', linestyle='-', color='b',
+                label='Time Series Data')
+        # Add labels and title
+        plt.xlabel('Time')
+        plt.ylabel('Value')
+        plt.title('Time Series Plot')
+        plt.legend()
+        # Display the plot
+        plt.tight_layout()
+        plt.show()
+        break
+        """
+
+        meta_data.append({'id': str(counter) + '.csv',
+                        'data_type': data_type,
+                        'daily_seasonality': daily_seasonality,
+                        'weekly_seasonality': weekly_seasonality,
+                        'noise (high 30% - low 10%)': noise_level,
+                        'trend': trend,
+                        'cyclic_period (3 months)': cyclic_period,
+                        'data_size': data_size,
+                        'percentage_outliers': percentage_outliers,
+                        'percentage_missing': 0.05,
+                        'freq': freq})
+    
+        if (counter==(num_datasets)): 
+            break
+            # generate_csv(list(zip(date_rng, data)), file_name)
 
     meta_data_df = pd.DataFrame.from_records(meta_data)
     meta_data_df.to_csv('sample_datasets/meta_data.csv', encoding='utf-8', index=False)
