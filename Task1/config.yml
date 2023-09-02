@@ -1,0 +1,16 @@
+simulation_parameters:
+  start_date: 2021-07-01
+  end_date: 2022-07-01  # Add end date
+  frequencies:
+  - "10T"
+  - "30T"
+  - "1H"
+  daily_seasonality_options: "no"
+  weekly_seasonality_options: "exist"
+  noise_levels: "small"
+  trend_levels: "exist"
+  cyclic_periods: "exist"
+  data_types: "additive" #, "multiplicative"]  # Add time-series data types
+  outliers_percentage: 0.05
+  num_datasets: 16  # Add number of datasets
+  data_sizes: [60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365]
