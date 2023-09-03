@@ -21,7 +21,6 @@ class TimeSeriesProduct():
         self.num_datasets = None
         self.data_sizes = None
     def TimeSeriesGenerator(self):
-        f=random.choice(self.frequencies)
-        date_rng = pd.date_range(start=self.start_date, end=self.end_date, freq=f)
-        return date_rng, f
+        date_rng = pd.date_range(start=self.start_date, end=self.end_date, freq=self.frequencies)
+        return date_rng
 

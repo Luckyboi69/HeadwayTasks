@@ -6,32 +6,19 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 random.seed(22)
-class TimeSeriesDirector:
-    def __init__(self, TimeSeriesBuilder,config):
-        self.builder = TimeSeriesBuilder
+class TimeSeriesDirector:   
+    def __init__(self, builder):
+        self.builder = builder
         self.meta_data = []
-        self.config= config
-        self.num_datasets = self.config['simulation_parameters']['num_datasets']
-        self.outliers_list = self.config['simulation_parameters']["outliers_percentage"]
-    def generate_time_series_data(self):
-        config_dict = self.reading_config()
 
-        # Set the configuration parameters in the TimeSeriesProduct
-        self.builder.time_series_product.start_date = config_dict["start_date"]
-        self.builder.time_series_product.end_date = config_dict["end_date"]
-        self.builder.time_series_product.frequencies = config_dict["frequencies"]
-        self.builder.time_series_product.daily_seasonality_options = config_dict["daily_seasonality_options"]
-        self.builder.time_series_product.weekly_seasonality_options = config_dict["weekly_seasonality_options"]
-        self.builder.time_series_product.noise_levels = config_dict["noise_levels"]
-        self.builder.time_series_product.trend_levels = config_dict["trend_levels"]
-        self.builder.time_series_product.cyclic_periods = config_dict["cyclic_periods"]
-        self.builder.time_series_product.data_type = config_dict["data_types"]
-        self.builder.time_series_product.data_sizes = config_dict["data_sizes"]
-        self.builder.time_series_product.outliers_percentage=random.choice(self.outliers_list)
-        outlier=self.builder.time_series_product.outliers_percentage=random.choice(self.outliers_list)
+    def generate_time_series_data(self,config_combination):
+        
+        self.builder.configure_from_combination(config_combination)
+        self.builder.set_data(self.builder.time_series_product.TimeSeriesGenerator())
 
-        #generate timestamps
-        data_size,freq=self.builder.Generator()
+    
+
+ 
 
         #generate values for timeseries
         value= self.builder.add_data()
@@ -39,17 +26,43 @@ class TimeSeriesDirector:
         scaler = MinMaxScaler(feature_range=(-1, 1))
         value = scaler.fit_transform(value.values.reshape(-1, 1))
         value = self.add_noise(value,self.builder.time_series_product.noise_levels)
-        value, anomaly = self.add_outliers(value, outlier)
+       # value, anomaly = self.add_outliers(value, outlier)
+        
         value = self.add_missing_values(value, 0.05)
         # Combine the components into the final time series data
+        #print("Im in director")
+        #print(value)
         time_series_data = pd.DataFrame({
             'Date': self.builder.data,
-            'value': value,
-            'anomalies':anomaly
+            'value': value
+          #  ,'anomalies':anomaly
         })
-        file_name = f"TimeSeries_daily_{self.builder.time_series_product.daily_seasonality_options}_weekly_{self.builder.time_series_product.weekly_seasonality_options}_noise_{self.builder.time_series_product.noise_levels}_trend_{self.builder.time_series_product.trend_levels}_cycle_{self.builder.time_series_product.cyclic_periods}_outliers_{int(outlier * 100)}%_freq_{freq}_size_{data_size}Days.csv"
-        print(f"File '{file_name}' generated.")
+        #file_name = f"TimeSeries_daily_{self.builder.time_series_product.daily_seasonality_options}_weekly_{self.builder.time_series_product.weekly_seasonality_options}_noise_{self.builder.time_series_product.noise_levels}_trend_{self.builder.time_series_product.trend_levels}_cycle_{self.builder.time_series_product.cyclic_periods}_outliers_{int(outlier * 100)}%_freq_{freq}_size_{data_size}Days.csv"
+        #print(f"File '{file_name}' generated.")
         return time_series_data   
+    
+    def generate_all_config_combinations(self, config_attributes):
+        config = config_attributes['simulation_parameters']
+        frequencies_list = config['frequencies']
+        daily_seasonality_options_list = config['daily_seasonality_options']
+        weekly_seasonality_options_list = config['weekly_seasonality_options']
+        noise_levels_list = config['noise_levels']
+        trend_levels_list = config['trend_levels']
+        cyclic_periods_list = config['cyclic_periods']
+        outliers_percentage_list = config['outliers_percentage']
+       
+        config_combinations = list(itertools.product(
+            frequencies_list,
+            daily_seasonality_options_list,
+            weekly_seasonality_options_list,
+            noise_levels_list,
+            trend_levels_list,
+            cyclic_periods_list,
+            outliers_percentage_list
+        ))
+      
+        return config_combinations
+
     def add_noise(self,data,noise_level):
     
         if noise_level == "small":
@@ -84,38 +97,29 @@ class TimeSeriesDirector:
         data_with_missing[missing_indices] = np.nan
 
         return data_with_missing
-    def reading_config(self):
-        config_dict = {
-            "start_date": self.config['simulation_parameters']['start_date'],
-            "end_date": self.config['simulation_parameters']['end_date'],
-            "frequencies": self.config['simulation_parameters']['frequencies'],
-            "daily_seasonality_options": self.config['simulation_parameters']['daily_seasonality_options'],
-            "weekly_seasonality_options": self.config['simulation_parameters']['weekly_seasonality_options'],
-            "noise_levels": self.config['simulation_parameters']['noise_levels'],
-            "trend_levels": self.config['simulation_parameters']['trend_levels'],
-            "cyclic_periods": self.config['simulation_parameters']['cyclic_periods'],
-            "data_types": self.config['simulation_parameters']['data_types'],
-            "outliers_percentage": self.config['simulation_parameters']['outliers_percentage'],
-            "data_sizes": self.config['simulation_parameters']['data_sizes']
-        }
-        return config_dict
+
     def save_to_file(self,df,counter):
        df=df.to_csv('sample_datasets/' + str(counter+1) + '.csv', encoding='utf-8', index=False)
-       self.meta_data.append({'id': str(counter+1) + '.csv',
-                        'daily_seasonality': self.builder.time_series_product.daily_seasonality_options,
-                        'weekly_seasonality': self.builder.time_series_product.weekly_seasonality_options,
-                        'noise (high 30% - low 10%)':self.builder.time_series_product.noise_levels,
-                        'trend':self.builder.time_series_product.trend_levels,
-                        'cyclic_period (3 months)': self.builder.time_series_product.cyclic_periods,
-                        'data_size': self.builder.time_series_product.data_sizes,
-                        'percentage_outliers': int(self.builder.time_series_product.outliers_percentage * 100),
-                        'percentage_missing': 0.05,
-                        'freq': self.builder.time_series_product.frequencies})
+    #  self.meta_data.append({'id': str(counter+1) + '.csv',
+    #                     'daily_seasonality': self.builder.time_series_product.daily_seasonality_options,
+    #                     'weekly_seasonality': self.builder.time_series_product.weekly_seasonality_options,
+    #                     'noise (high 30% - low 10%)':self.builder.time_series_product.noise_levels,
+    #                     'trend':self.builder.time_series_product.trend_levels,
+    #                     'cyclic_period (3 months)': self.builder.time_series_product.cyclic_periods,
+    #                     'data_size': self.builder.time_series_product.data_sizes,
+    #                     'percentage_outliers': int(self.builder.time_series_product.outliers_percentage * 100),
+    #                     'percentage_missing': 0.05,
+    #                     'freq': self.builder.time_series_product.frequencies})
    
     def generate_multiple_datasets(self):
-            for i in range(self.num_datasets):
+            #for i in range(0):
                 # Update the counter to track the dataset number
-                time_series_data = self.generate_time_series_data()
+             config_combinations = self.generate_all_config_combinations()
+
+             for i, config_combination in enumerate(config_combinations):
+            # Generate time series data for the current combination
+                time_series_data = self.generate_time_series_data(config_combination)
                 self.save_to_file(time_series_data,i)
-            meta_data_df = pd.DataFrame.from_records(self.meta_data)
-            meta_data_df.to_csv('sample_datasets/meta_data.csv', encoding='utf-8', index=False)        
+                
+             meta_data_df = pd.DataFrame.from_records(self.meta_data)
+             meta_data_df.to_csv('sample_datasets/meta_data.csv', encoding='utf-8', index=False)        

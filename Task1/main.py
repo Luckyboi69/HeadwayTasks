@@ -10,26 +10,37 @@ from TimeSeriesDirector import TimeSeriesDirector
 from TimeSeriesBuilder import TimeSeriesBuilder
 from AdditiveTimeSeriesBuilder import AdditiveTimeSeriesBuilder
 from MultiplicativeTimeSeriesBuilder import MultiplicativeTimeSeriesBuilder
-
+from YAMLReader import YAMLReader
 random.seed(22)  
 def main():
-    # Read the configuration from the YAML file
-    with open('config.yml', 'r') as config_file:
-        config = yaml.safe_load(config_file)
+    yaml_reader = YAMLReader()
 
-    # Create a TimeSeriesProduct instance
-    time_series_product = TimeSeriesProduct()
+    # Specify the path to your YAML configuration file
+    config_file_path = 'config.yml'
 
-    # Create a builder instance and pass the product
-    if config["simulation_parameters"]["data_types"]=='addittive':
-        builder = AdditiveTimeSeriesBuilder(time_series_product)
-    else: 
-        builder = MultiplicativeTimeSeriesBuilder(time_series_product)
+    # Read the attributes from the YAML file
+    config_attributes = yaml_reader.read_attributes(config_file_path)
+    data_types_value = config_attributes.get("simulation_parameters", {}).get("data_types")
+    # Check if configuration attributes were successfully read
+    if not config_attributes:
+        print("Failed to read configuration attributes from the YAML file.")
+        return
+    # Create a builder instance and pass the product and configuration attributes
+    if data_types_value == 'additive':
+        builder = AdditiveTimeSeriesBuilder(config_attributes)
+    elif data_types_value == 'multiplicative':
+        builder = MultiplicativeTimeSeriesBuilder(config_attributes)
+    else:
+        raise ValueError(f"Unsupported data type: {data_types_value}")
+
     # Create a TimeSeriesDirector instance and pass the builder and configuration
-    director = TimeSeriesDirector(builder, config)
+    director = TimeSeriesDirector(builder)
 
         # Generate time series data using the director
-    director.generate_multiple_datasets()
+    config_combinations = director.generate_all_config_combinations(config_attributes)
+    for i, config_combination in enumerate(config_combinations):
+        time_series_data = director.generate_time_series_data(config_combination)
+        director.save_to_file(time_series_data, i)
 
   
 if __name__ == "__main__":
