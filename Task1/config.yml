@@ -10,7 +10,7 @@ simulation_parameters:
   noise_levels: "small"
   trend_levels: "exist"
   cyclic_periods: "exist"
-  data_types: "additive" #, "multiplicative"]  # Add time-series data types
-  outliers_percentage: 0.05
+  data_types: "multiplicative" #, "multiplicative"]  # Add time-series data types
+  outliers_percentage: [0.05, 0.01, 0.03, 0.0]
   num_datasets: 16  # Add number of datasets
   data_sizes: [60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 365]

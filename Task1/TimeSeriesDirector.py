@@ -1,16 +1,18 @@
 import TimeSeriesBuilder
 import itertools
 import yaml
+import random
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-
+random.seed(22)
 class TimeSeriesDirector:
     def __init__(self, TimeSeriesBuilder,config):
         self.builder = TimeSeriesBuilder
         self.meta_data = []
         self.config= config
         self.num_datasets = self.config['simulation_parameters']['num_datasets']
+        self.outliers_list = self.config['simulation_parameters']["outliers_percentage"]
     def generate_time_series_data(self):
         config_dict = self.reading_config()
 
@@ -24,10 +26,12 @@ class TimeSeriesDirector:
         self.builder.time_series_product.trend_levels = config_dict["trend_levels"]
         self.builder.time_series_product.cyclic_periods = config_dict["cyclic_periods"]
         self.builder.time_series_product.data_type = config_dict["data_types"]
-        self.builder.time_series_product.outliers_percentage = config_dict["outliers_percentage"]
         self.builder.time_series_product.data_sizes = config_dict["data_sizes"]
+        self.builder.time_series_product.outliers_percentage=random.choice(self.outliers_list)
+        outlier=self.builder.time_series_product.outliers_percentage=random.choice(self.outliers_list)
+
         #generate timestamps
-        self.builder.Generator()
+        data_size,freq=self.builder.Generator()
 
         #generate values for timeseries
         value= self.builder.add_data()
@@ -35,8 +39,7 @@ class TimeSeriesDirector:
         scaler = MinMaxScaler(feature_range=(-1, 1))
         value = scaler.fit_transform(value.values.reshape(-1, 1))
         value = self.add_noise(value,self.builder.time_series_product.noise_levels)
-        
-        value, anomaly = self.add_outliers(value, self.builder.time_series_product.outliers_percentage)
+        value, anomaly = self.add_outliers(value, outlier)
         value = self.add_missing_values(value, 0.05)
         # Combine the components into the final time series data
         time_series_data = pd.DataFrame({
@@ -44,7 +47,7 @@ class TimeSeriesDirector:
             'value': value,
             'anomalies':anomaly
         })
-        file_name = f"TimeSeries_daily_{self.builder.time_series_product.daily_seasonality_options}_weekly_{self.builder.time_series_product.weekly_seasonality_options}_noise_{self.builder.time_series_product.noise_levels}_trend_{self.builder.time_series_product.trend_levels}_cycle_{self.builder.time_series_product.cyclic_periods}_outliers_{int(self.builder.time_series_product.outliers_percentage * 100)}%_freq_{self.builder.time_series_product.frequencies}_size_{self.builder.time_series_product.data_sizes}Days.csv"
+        file_name = f"TimeSeries_daily_{self.builder.time_series_product.daily_seasonality_options}_weekly_{self.builder.time_series_product.weekly_seasonality_options}_noise_{self.builder.time_series_product.noise_levels}_trend_{self.builder.time_series_product.trend_levels}_cycle_{self.builder.time_series_product.cyclic_periods}_outliers_{int(outlier * 100)}%_freq_{freq}_size_{data_size}Days.csv"
         print(f"File '{file_name}' generated.")
         return time_series_data   
     def add_noise(self,data,noise_level):
@@ -60,7 +63,7 @@ class TimeSeriesDirector:
         for i in range(len(data)):
             noise[i] = np.random.normal(0, abs(data[i]) * noise_level) if noise_level > 0 else 0
         return pd.Series((data + noise)[:, 0])
-    def add_outliers(self,data, percentage_outliers=0.05):
+    def add_outliers(self,data, percentage_outliers):
  
         num_outliers = int(len(data) * percentage_outliers)
         outlier_indices = np.random.choice(len(data), num_outliers, replace=False)
