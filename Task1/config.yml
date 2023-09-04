@@ -21,6 +21,6 @@ simulation_parameters:
   cyclic_periods:
     - "exist"
     - "no"
-  data_types: "additive"  # Make sure this line is correctly indented
+  data_types: "multiplicative"  # Make sure this line is correctly indented
   outliers_percentage: [0.05, 0]
   missing_percentage: [0.05, 0]
