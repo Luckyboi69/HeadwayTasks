@@ -17,4 +17,4 @@ simulation_parameters:
     - "exist"
   data_types: "additive"  # Make sure this line is correctly indented
   outliers_percentage: [0.05, 0.01, 0.03, 0.0]
-
+  missing_percentage: [0.05, 0]
