@@ -1,0 +1,27 @@
+# system_config.yaml
+
+data_reading:
+  method: "yaml"  # Options: yaml, database, env, etc.
+  yaml_config_file: "config.yml"  # Specify the YAML data configuration file if method is "yaml"
+  database_config:
+    host: "localhost"
+    port: 8000
+    username: "username"
+    password: "password"
+    database_name: "database_name"
+  env_config:
+    env_var_name: "DATA_API_KEY"
+# system_config.yaml
+
+data_saving:
+  method: "folder"  # Specify the data saving method (folder, kafka, database, etc.)
+  folder_path: "sample_datasets/"  # Specify the folder path for saving datasets
+  kafka_config:
+    bootstrap_servers: ""
+    topic: ""
+  database_config:
+    host: ""
+    port: 8000
+    database: "my_dataset_db"
+    user: "my_user"
+    password: "my_password"

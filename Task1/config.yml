@@ -7,14 +7,20 @@ simulation_parameters:
     - "1H"
   daily_seasonality_options:
     - "no"
+    - "exist"
   weekly_seasonality_options:
     - "exist"
+    - "no"
   noise_levels:
     - "small"
+    - "large"
+    - "none"
   trend_levels:
     - "exist"
+    - "no"
   cyclic_periods:
     - "exist"
+    - "no"
   data_types: "additive"  # Make sure this line is correctly indented
-  outliers_percentage: [0.05, 0.01, 0.03, 0.0]
+  outliers_percentage: [0.05, 0]
   missing_percentage: [0.05, 0]

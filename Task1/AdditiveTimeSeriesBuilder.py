@@ -3,15 +3,18 @@ import pandas as pd
 import numpy as np
 from TimeSeriesBuilder import TimeSeriesBuilder
 from TimeSeriesProduct import TimeSeriesProduct
-
+from YAMLReader import YAMLReader
 random.seed(22)
 # Concrete builder class
 class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
-    def __init__(self, config_attributes):
+    def __init__(self):
         # Create an instance of TimeSeriesProduct directly within the builder
         self.time_series_product = TimeSeriesProduct()
         self.data=None
         # Set the configuration attributes within the builder
+
+    def build_from_yaml(self, config_attributes):
+       
         self.time_series_product.start_date = config_attributes['simulation_parameters']['start_date']
         self.time_series_product.end_date = config_attributes['simulation_parameters']['end_date']
         self.time_series_product.frequencies = config_attributes['simulation_parameters']['frequencies']
@@ -23,6 +26,8 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
         self.time_series_product.missing_percentage = config_attributes['simulation_parameters']['missing_percentage']
         self.time_series_product.data_type = config_attributes['simulation_parameters']['data_types']
         self.config = config_attributes
+    def build_from_db(self,data):
+        pass
     def set_data(self, data):
         self.data = data
     def configure_from_combination(self, config_combination):

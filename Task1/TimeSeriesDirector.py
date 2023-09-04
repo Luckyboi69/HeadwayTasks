@@ -1,4 +1,6 @@
 import TimeSeriesBuilder
+from FolderProducer import FolderProducer
+from KafkaProducer import KafkaProducer
 import itertools
 import yaml
 import random
@@ -9,7 +11,6 @@ random.seed(22)
 class TimeSeriesDirector:   
     def __init__(self, builder):
         self.builder = builder
-        self.meta_data = []
 
     def generate_time_series_data(self,config_combination):
         
@@ -60,29 +61,22 @@ class TimeSeriesDirector:
 
 
     
-
-
-    def save_to_file(self,df,counter):
-       df=df.to_csv('sample_datasets/' + str(counter+1) + '.csv', encoding='utf-8', index=False)
-       self.meta_data.append({'id': str(counter+1) + '.csv',
-                        'daily_seasonality': self.builder.time_series_product.daily_seasonality_options,
-                        'weekly_seasonality': self.builder.time_series_product.weekly_seasonality_options,
-                        'noise (high 30% - low 10%)':self.builder.time_series_product.noise_levels,
-                        'trend':self.builder.time_series_product.trend_levels,
-                        'cyclic_period (3 months)': self.builder.time_series_product.cyclic_periods,
-                        'percentage_outliers': int(self.builder.time_series_product.outliers_percentage * 100),
-                        'percentage_missing': int(self.builder.time_series_product.missing_percentage * 100),
-                        'freq': self.builder.time_series_product.frequencies})
-   
-    def generate_multiple_datasets(self):
-            #for i in range(0):
-                # Update the counter to track the dataset number
-             config_combinations = self.generate_all_config_combinations()
-
+    
+    def generate_multiple_datasets(self,config_attributes,data_saving):
+             if (data_saving["method"]=="folder"):
+                config=data_saving["folder_path"]
+                data_producer=FolderProducer(self.builder)  
+             elif(data_saving["method"]=="kafka"):
+                 config=data_saving["kafka_config"]
+                 data_producer=KafkaProducer(self.builder)  
+             config_combinations = self.generate_all_config_combinations(config_attributes)
+           
              for i, config_combination in enumerate(config_combinations):
             # Generate time series data for the current combination
                 time_series_data = self.generate_time_series_data(config_combination)
-                self.save_to_file(time_series_data,i)
+               
+                data_producer.save_file(time_series_data,i,config)
                 
-             meta_data_df = pd.DataFrame.from_records(self.meta_data)
-             meta_data_df.to_csv('sample_datasets/meta_data.csv', encoding='utf-8', index=False)        
+             data_producer.save_meta_data(config)        
+                
+
