@@ -9,7 +9,7 @@ class Reader(ABC):
     """
 
     @abstractmethod
-    def read_attributes(self):
+    def read_attributes(self,path):
         """
         Abstract method to be implemented by concrete reader classes to read attributes.
 

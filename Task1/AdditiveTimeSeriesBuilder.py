@@ -25,7 +25,7 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
         self.data = None
         self.config = None
 
-    def build_from_yaml(self, config_attributes):
+    def build_from_reader(self, config_attributes):
         """
         Build the time series data from YAML configuration attributes.
 
@@ -42,16 +42,18 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
         self.time_series_product.cyclic_periods = config_attributes['simulation_parameters']['cyclic_periods']
         self.time_series_product.missing_percentage = config_attributes['simulation_parameters']['missing_percentage']
         self.time_series_product.data_type = config_attributes['simulation_parameters']['data_types']
+        self.time_series_product.trend_coefficients = config_attributes['simulation_parameters']['trend_coefficients']
+        self.time_series_product.daily_amplitude = config_attributes['simulation_parameters']['daily_amplitude']
+        self.time_series_product.daily_phase_shift = config_attributes['simulation_parameters']['daily_phase_shift']
+        self.time_series_product.daily_multiplier = config_attributes['simulation_parameters']['daily_multiplier']
+        self.time_series_product.weekly_amplitude = config_attributes['simulation_parameters']['weekly_amplitude']
+        self.time_series_product.weekly_phase_shift = config_attributes ['simulation_parameters']['weekly_phase_shift']
+        self.time_series_product.weekly_multiplier = config_attributes ['simulation_parameters']['weekly_multiplier']
+        self.time_series_product.cyclic_frequency = config_attributes ['simulation_parameters']['cyclic_frequency']
+
         self.config = config_attributes
 
-    def build_from_db(self, data):
-        """
-        Build the time series data from a database source.
 
-        Args:
-            data: Data source for generating the time series data (e.g., database query result).
-        """
-        pass
 
     def set_data(self, data):
         """
@@ -69,7 +71,7 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
         Args:
             config_combination (tuple): A combination of parameters to configure the time series generation.
         """
-        frequency, daily_seasonality_option, weekly_seasonality_option, noise_level, trend_level, cyclic_period, outliers_percentage, missing_percentage = config_combination
+        frequency, daily_seasonality_option, weekly_seasonality_option, noise_level, trend_level, cyclic_period, outliers_percentage, missing_percentage, daily_amplitude, daily_phase_shift,daily_multiplier, weekly_amplitude, weekly_phase_shift, weekly_multiplier, cyclic_frequency = config_combination
         self.time_series_product.daily_seasonality_options = daily_seasonality_option
         self.time_series_product.weekly_seasonality_options = weekly_seasonality_option
         self.time_series_product.frequencies = frequency
@@ -78,7 +80,13 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
         self.time_series_product.cyclic_periods = cyclic_period
         self.time_series_product.outliers_percentage = outliers_percentage
         self.time_series_product.missing_percentage = missing_percentage
-
+        self.time_series_product.daily_amplitude = daily_amplitude
+        self.time_series_product.daily_phase_shift = daily_phase_shift
+        self.time_series_product.daily_multiplier = daily_multiplier
+        self.time_series_product.weekly_amplitude = weekly_amplitude
+        self.time_series_product.weekly_phase_shift = weekly_phase_shift
+        self.time_series_product.weekly_multiplier = weekly_multiplier
+        self.time_series_product.cyclic_frequency = cyclic_frequency
     def add_weekly_seasonality(self):
         """
         Add weekly seasonality component to the time series data.
@@ -87,7 +95,17 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
             pd.Series: A pandas Series representing the weekly seasonality component.
         """
         if self.time_series_product.weekly_seasonality_options == "exist":
-            seasonal_component = np.sin(2 * np.pi * self.data.dayofweek / 7)
+            data_size = len(self.data)
+
+            # Specify custom attributes (amplitude, phase_shift, frequency_multiplier)
+            amplitude = self.time_series_product.weekly_amplitude
+            phase_shift = self.time_series_product.weekly_phase_shift
+            frequency_multiplier = self.time_series_product.weekly_multiplier
+
+            # Generate the weekly seasonality component with custom attributes
+            t = np.arange(data_size)  # Time index
+            seasonal_component = amplitude * np.sin(2 * np.pi * (t * frequency_multiplier + phase_shift) / 7)
+
         else:
             seasonal_component = np.zeros(len(self.data))
         return pd.Series(seasonal_component)
@@ -100,14 +118,24 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
             pd.Series: A pandas Series representing the daily seasonality component.
         """
         if self.time_series_product.daily_seasonality_options == "exist":
-            seasonal_component = np.sin(2 * np.pi * self.data.hour / 24)
+            data_size = len(self.data)
+
+            # Specify custom attributes (amplitude, phase_shift, frequency_multiplier)
+            amplitude = self.time_series_product.daily_amplitude
+            phase_shift = self.time_series_product.daily_phase_shift
+            frequency_multiplier = self.time_series_product.daily_multiplier
+
+            # Generate the daily seasonality component with custom attributes
+            t = np.arange(data_size)  # Time index
+            seasonal_component = amplitude * np.sin(2 * np.pi * (t * frequency_multiplier + phase_shift) / 24)
+
         else:
             seasonal_component = np.zeros(len(self.data))
         return pd.Series(seasonal_component)
 
     def add_trend(self):
         """
-        Add trend component to the time series data.
+        Add a trend component to the time series data based on custom coefficients.
 
         Returns:
             pd.Series: A pandas Series representing the trend component.
@@ -117,9 +145,11 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
         data_size = (end_date - start_date).days
 
         if self.time_series_product.trend_levels == "exist":
-            slope = random.choice([1, -1])
-            trend_component = np.linspace(0, data_size / 30 * slope, len(self.data)) if slope == 1 else np.linspace(
-                -1 * data_size / 30, 0, len(self.data))
+            trend_coefficients = self.time_series_product.trend_coefficients
+
+            # Generate the trend component based on the polynomial equation
+            t = np.arange(data_size)  # Time index
+            trend_component = np.polyval(trend_coefficients, t)
         else:
             trend_component = np.zeros(len(self.data))
         return pd.Series(trend_component)
@@ -133,7 +163,16 @@ class AdditiveTimeSeriesBuilder(TimeSeriesBuilder):
         """
         cycle_component = 0
         if self.time_series_product.cyclic_periods == "exist":
-            cycle_component += np.sin(2 * np.pi * (self.data.quarter - 1) / 4)
+            # Get the data size (number of data points)
+            data_size = len(self.data)
+
+            # Specify the custom cyclic frequency
+            custom_cyclic_frequency = self.time_series_product.cyclic_frequency
+
+            # Generate the cyclic component with custom frequency
+            t = np.arange(data_size)  # Time index
+            cycle_component = np.sin(2 * np.pi * t / custom_cyclic_frequency)
+
         else:
             cycle_component = 0
         return cycle_component

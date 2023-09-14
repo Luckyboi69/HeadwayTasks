@@ -40,7 +40,14 @@ class TimeSeriesProduct():
         self.noise_percentage = None
         self.outliers_percentage = None
         self.missing_percentage = None
-
+        self.trend_coefficients = None
+        self.daily_amplitude = None
+        self.daily_phase_shift= None
+        self.daily_multiplier = None
+        self.weekly_amplitude = None
+        self.weekly_phase_shift= None
+        self.weekly_multiplier = None
+        self.cyclic_frequency = None
     def TimeSeriesGenerator(self):
         """
         Generate a date range for the time series based on the configured attributes.

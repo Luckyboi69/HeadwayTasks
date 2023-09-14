@@ -1,13 +1,13 @@
 # system_config.yaml
 
 data_reading:
-  method: "yaml"  # Options: yaml, database, env, etc.
+  method: "json"  # Options: yaml, database, env, etc.
   yaml_config_file: "config.yml"  # Specify the YAML data configuration file if method is "yaml"
   database_config:
     host: "localhost"
     port: 8000
     username: "username"
-    password: "password"
+    password: "password"  
     database_name: "database_name"
   env_config:
     env_var_name: "DATA_API_KEY"

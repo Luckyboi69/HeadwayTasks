@@ -78,7 +78,13 @@ class TimeSeriesDirector:
         cyclic_periods_list = config['cyclic_periods']
         outliers_percentage_list = config['outliers_percentage']
         missing_percentage_list = config['missing_percentage']
-
+        daily_amplitude_list = config['daily_amplitude']
+        daily_phase_shift_list = config ['daily_phase_shift']
+        daily_multiplier = config ['daily_multiplier']
+        weekly_amplitude_list = config['weekly_amplitude']
+        weekly_phase_shift_list = config ['weekly_phase_shift']
+        weekly_multiplier_list = config ['weekly_multiplier']
+        cyclic_frequency_list = config ['cyclic_frequency']
         config_combinations = list(itertools.product(
             frequencies_list,
             daily_seasonality_options_list,
@@ -87,7 +93,14 @@ class TimeSeriesDirector:
             trend_levels_list,
             cyclic_periods_list,
             outliers_percentage_list,
-            missing_percentage_list
+            missing_percentage_list,
+            daily_amplitude_list,
+            daily_phase_shift_list,
+            daily_multiplier,
+            weekly_amplitude_list,
+            weekly_phase_shift_list,
+            weekly_multiplier_list,
+            cyclic_frequency_list
         ))
 
         return config_combinations
