@@ -1,0 +1,43 @@
+CREATE KEYSPACE Sales WITH replication = {'class': 'SimpleStrategy', 'replication_factor':'1'} AND durable_writes = true;
+
+Table Name: orders
+Partition Key: year (int)
+Clustering Key: order_id (uuid)
+Columns:
+  - order_id (uuid)
+  - quantity (int)
+  - price (decimal)
+  - orderline (int)
+  - sales (decimal)
+  - order_date (timestamp)
+  - status (text)
+  - product_line (text)
+  - product_code (text)
+  - MSRP (int)
+  - customer_id (uuid)
+  - customer_name (text)
+
+Table Name: customers
+Partition Key: country (text)
+Clustering Key: customer_id (uuid)
+Columns:
+  - customer_id (uuid)
+  - customer_name (text)
+  - phone (text)
+  - address (text)
+  - city (text)
+  - state (text)
+  - postal_code (text)
+  - region (text)
+  - contact_first_name (text)
+  - contact_last_name (text)
+
+Table Name: product_sales
+Partition Key: year (int)
+Clustering Key: product_id (text)
+Columns:
+  - product_line (text)
+  - product_code (text)
+  - MSRP (int)
+  - year (int)
+  - total_sales (decimal)
