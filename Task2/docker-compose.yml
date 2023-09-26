@@ -15,8 +15,8 @@ services:
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
-      - /mnt/d/Users/youssef.medhat/Documents/GitHub/HeadwayTasks/Task2/Task1/sample_datasets:/csv_output
-      - /mnt/d/Users/youssef.medhat/Documents/GitHub/HeadwayTasks/Task2/simulator_api/migrations:/app/simulator_api/migrations
+      - ./Task1/sample_datasets:/csv_output
+      - ./simulator_api/migrations:/app/simulator_api/migrations
     ports:
       - "8080:8000"
     depends_on:
