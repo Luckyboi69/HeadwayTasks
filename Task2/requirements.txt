@@ -1,3 +1,8 @@
 Django
 djangorestframework
 psycopg2
+pandas
+pyyaml
+numpy
+scikit-learn
+requests

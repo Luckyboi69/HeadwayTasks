@@ -1,6 +1,7 @@
 import TimeSeriesBuilder
 from FolderProducer import FolderProducer
 from KafkaProducer import KafkaProducer
+from NifiProducer import NifiProducer
 import itertools
 import yaml
 import random
@@ -124,11 +125,12 @@ class TimeSeriesDirector:
             data_producer = KafkaProducer(self.builder)
 
         config_combinations = self.generate_all_config_combinations(config_attributes)
-
+        nifi= NifiProducer(self.builder)
+        nifi_url="http://nifi:5000"
         for i, config_combination in enumerate(config_combinations):
             # Generate time series data for the current combination
             time_series_data = self.generate_time_series_data(config_combination)
-
+            nifi.save_file(time_series_data,i,nifi_url)
             data_producer.save_file(time_series_data, i, config)
 
         data_producer.save_meta_data(config)

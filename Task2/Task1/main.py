@@ -18,7 +18,7 @@ import json
 
 random.seed(22)  
 def main():
-    with open("D:\\Users\\youssef.medhat\\Documents\\GitHub\\HeadwayTasks\\Task2\\Task1\\system_config.yaml", "r") as config_file:
+    with open("./Task1/system_config.yaml", "r") as config_file:
         system_config = yaml.safe_load(config_file)
     
     data_reading_method = system_config["data_reading"]["method"]

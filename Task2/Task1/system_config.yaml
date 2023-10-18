@@ -15,7 +15,7 @@ data_reading:
 
 data_saving:
   method: "folder"  # Specify the data saving method (folder, kafka, database, etc.)
-  folder_path: "D:\\Users\\youssef.medhat\\Documents\\GitHub\\HeadwayTasks\\Task2\\Task1\\sample_datasets\\"  # Specify the folder path for saving datasets
+  folder_path: "./Task1/sample_datasets/"  # Specify the folder path for saving datasets
   kafka_config:
     bootstrap_servers: ""
     topic: ""

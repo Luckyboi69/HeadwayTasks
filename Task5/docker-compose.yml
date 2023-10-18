@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  db:
+    image: postgres
+    ports:
+      - "5444:5432"
+    environment:
+      POSTGRES_DB: Task7
+      POSTGRES_USER: youssefmedhat
+      POSTGRES_PASSWORD: 12345678
+    networks:
+      - nifi_network  
   nifi:
     image: apache/nifi:latest
     container_name: nifi
@@ -12,5 +22,13 @@ services:
       - NIFI_SECURITY_PASSWD=admin
     ports:
       - "8080:8080"
+      - "5000:5000"
     volumes:
       - /mnt/d/Users/youssef.medhat/Documents/GitHub/HeadwayTasks/nifi_folder:/nifi_folder
+    networks:
+      - nifi_network
+
+networks:
+  nifi_network:
+    external:
+      name: nifi_network

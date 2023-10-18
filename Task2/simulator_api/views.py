@@ -298,7 +298,9 @@ def run_simulator(request):
                 simulator.save()
                 process.communicate(input=data)
 
-
+                print(process)
+                print("HEHEHE")
+                print(process_id)
                 
                 # Update the simulator status based on the process return code
                 if process.returncode == 0:

@@ -7,17 +7,25 @@ services:
       POSTGRES_DB: Headway
       POSTGRES_USER: youssefmedhat
       POSTGRES_PASSWORD: 12345678
+    networks:
+      - nifi_network
 
   web:
     build:
       context: .
       dockerfile: Dockerfile  # Use the custom Dockerfile
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8085"
     volumes:
       - .:/app
       - ./Task1/sample_datasets:/csv_output
       - ./simulator_api/migrations:/app/simulator_api/migrations
     ports:
-      - "8080:8000"
+      - "8085:8085"
     depends_on:
       - db
+    networks:
+      - nifi_network
+
+networks:
+  nifi_network:
+    external: true

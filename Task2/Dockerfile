@@ -12,6 +12,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code
 COPY . /app/
-
-# Define the command to run your application
-#CMD ["gunicorn", "your_project_name.wsgi:application", "--bind", "0.0.0.0:8000"]
