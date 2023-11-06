@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import Mock, patch
-from FolderProducer import FolderProducer
+from Task1.FolderSaver import FolderSaver
 import pandas as pd
 
-class TestFolderProducer(unittest.TestCase):
+class TestFolderSaver(unittest.TestCase):
 
     def setUp(self):
         self.builder_mock = Mock()
@@ -15,7 +15,7 @@ class TestFolderProducer(unittest.TestCase):
         self.builder_mock.time_series_product.outliers_percentage = 0.05
         self.builder_mock.time_series_product.missing_percentage = 0.05
         self.builder_mock.time_series_product.frequencies = ["10T"]
-        self.producer = FolderProducer(self.builder_mock)
+        self.producer = FolderSaver(self.builder_mock)
 
     @patch('pandas.DataFrame.to_csv')
     def test_save_file(self, mock_to_csv):

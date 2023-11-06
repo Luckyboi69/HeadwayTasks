@@ -23,8 +23,8 @@ class SimulatorDetail(models.Model):
     )
 
     PRODUCER_TYPES = (
-        ('Kafka', 'Kafka'),
-        ('folder', 'CSV File'),
+        ('kafka', 'kafka'),
+        ('folder', 'folder'),
     )
     STATUS_CHOICES = (
         ('submitted', 'Submitted'),
@@ -37,6 +37,7 @@ class SimulatorDetail(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     name = models.CharField(max_length=255)
+    sink_name = models.CharField(max_length=255,default='./Task1/sample_datasets/')
     time_series_type = models.CharField(max_length=20, choices=TIME_SERIES_TYPES)
     producer_type = models.CharField(max_length=20, choices=PRODUCER_TYPES)
     process_id = models.CharField(max_length=50)
@@ -71,7 +72,8 @@ class DatasetConfiguration(models.Model):
         ('Succeeded', 'Succeeded'),
         ('Failed', 'Failed'),
     )
-
+    generator_id = models.CharField(max_length=30,default='0')
+    attribute_id = models.CharField(max_length=30,default='0')
     frequency = models.CharField(max_length=10)
     noise_level = models.CharField(max_length=10)
     trend_coefficients = models.CharField(max_length=255, default="0")

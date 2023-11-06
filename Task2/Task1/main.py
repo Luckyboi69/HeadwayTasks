@@ -27,6 +27,8 @@ def main():
         yaml_reader = YAMLReader()
         yaml_config_file = system_config["data_reading"]["yaml_config_file"]
         config_attributes = yaml_reader.read_attributes(yaml_config_file)
+        data_saving = system_config["data_saving"]
+
 
     
     elif data_reading_method =="database":
@@ -35,12 +37,13 @@ def main():
         json_reader = JSONReader()
         #json_data =
         json_data = sys.stdin.read()
-        config_attributes = json_reader.read_attributes(json_data)
+        config_attributes,data_saving = json_reader.read_attributes(json_data)
+        
     
 # Read the attributes from the YAML file
     
     data_types_value = config_attributes.get("simulation_parameters", {}).get("data_types")
-    
+
 # Check if configuration attributes were successfully read
     
     if not config_attributes:
@@ -57,7 +60,6 @@ def main():
         raise ValueError(f"Unsupported data type: {data_types_value}")
 
         
-    data_saving = system_config["data_saving"]
 
     # Create a TimeSeriesDirector instance and pass the builder
     director = TimeSeriesDirector(builder)

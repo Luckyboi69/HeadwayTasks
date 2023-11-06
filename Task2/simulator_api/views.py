@@ -33,7 +33,8 @@ def create_simulator(request):
     start_date = data.get("start_date")
     end_date = data.get("end_date")
     time_series_type = data.get("type")
-
+    sink_name=data.get("sink_name")
+    producer_type=data.get("producer_type")
     # Create the Simulator instance.
     simulator = SimulatorDetail(
         #process_id=uuid.uuid4(),
@@ -41,6 +42,8 @@ def create_simulator(request):
         start_date=start_date,
         end_date=end_date,
         time_series_type=time_series_type,
+        sink_name=sink_name,
+        producer_type=producer_type,
         status='Submitted'  # Set the initial status to 'Submitted'.
     )
     simulator.save()
@@ -48,6 +51,8 @@ def create_simulator(request):
     # Extract and create datasets and seasonality components.
     datasets_data = data.get("datasets", [])
     for dataset_data in datasets_data:
+        generator_id=dataset_data.get("generator_id")
+        attribute_id=dataset_data.get("attribute_id")
         frequency = dataset_data.get("frequency")
         trend_coefficients = dataset_data.get("trend_coefficients")
         missing_percentage = dataset_data.get("missing_percentage")
@@ -193,6 +198,8 @@ def get_simulator_data(simulator_id):
         # Access related data
         name = simulator.name
         status = simulator.status
+        sink_name = simulator.sink_name
+        producer_type= simulator.producer_type
         start_date = simulator.start_date.strftime("%Y-%m-%d")
         end_date = simulator.end_date.strftime("%Y-%m-%d")
         time_series_type= simulator.time_series_type
@@ -201,6 +208,8 @@ def get_simulator_data(simulator_id):
         # Create a data structure to store all associated data
         data = {
             'name': name,
+            'sink_name':sink_name,
+            'producer_type': producer_type,
             'start_date': start_date,
             'end_date': end_date,
             'type': time_series_type,
@@ -208,6 +217,8 @@ def get_simulator_data(simulator_id):
         }
 
         #for dataset_configuration in dataset_configurations:
+        attribute_id= dataset_configuration.attribute_id
+        generator_id = dataset_configuration.generator_id
         frequency = dataset_configuration.frequency
         trend_coefficients = dataset_configuration.trend_coefficients
         missing_percentage= dataset_configuration.missing_percentage
@@ -220,6 +231,8 @@ def get_simulator_data(simulator_id):
         seasonality_components = SeasonalityComponent.objects.filter(dataset_configuration_id=dataset_id)
 
         dataset_data = {
+            'attribute_id':attribute_id,
+            'generator_id':generator_id,
             'frequency': frequency,
             "trend_coefficients": trend_coefficients,
             "missing_percentage": missing_percentage,
@@ -298,10 +311,6 @@ def run_simulator(request):
                 simulator.save()
                 process.communicate(input=data)
 
-                print(process)
-                print("HEHEHE")
-                print(process_id)
-                
                 # Update the simulator status based on the process return code
                 if process.returncode == 0:
                     simulator.status = "Completed"

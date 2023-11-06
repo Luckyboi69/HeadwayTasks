@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: 12345678
     networks:
       - nifi_network
-
+      - confluent
   web:
     build:
       context: .
@@ -25,7 +25,10 @@ services:
       - db
     networks:
       - nifi_network
+      - confluent
 
 networks:
+  confluent:
+    external: true
   nifi_network:
     external: true

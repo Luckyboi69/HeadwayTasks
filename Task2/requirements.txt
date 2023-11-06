@@ -6,3 +6,4 @@ pyyaml
 numpy
 scikit-learn
 requests
+confluent-kafka

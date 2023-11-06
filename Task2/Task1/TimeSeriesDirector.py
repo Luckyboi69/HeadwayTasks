@@ -1,7 +1,8 @@
 import TimeSeriesBuilder
-from FolderProducer import FolderProducer
+from FolderSaver import FolderSaver
 from KafkaProducer import KafkaProducer
-from NifiProducer import NifiProducer
+from KafkaConsumer import KafkaConsumer
+from NifiSaver import NifiSaver
 import itertools
 import yaml
 import random
@@ -117,20 +118,30 @@ class TimeSeriesDirector:
         Returns:
             None
         """
-        if data_saving["method"] == "folder":
-            config = data_saving["folder_path"]
-            data_producer = FolderProducer(self.builder)
-        elif data_saving["method"] == "kafka":
-            config = data_saving["kafka_config"]
-            data_producer = KafkaProducer(self.builder)
-
         config_combinations = self.generate_all_config_combinations(config_attributes)
-        nifi= NifiProducer(self.builder)
-        nifi_url="http://nifi:5000"
-        for i, config_combination in enumerate(config_combinations):
-            # Generate time series data for the current combination
-            time_series_data = self.generate_time_series_data(config_combination)
-            nifi.save_file(time_series_data,i,nifi_url)
-            data_producer.save_file(time_series_data, i, config)
 
-        data_producer.save_meta_data(config)
+        if data_saving["producer_type"] == "folder":
+            config = data_saving["sink_name"]
+            data_saver = FolderSaver(self.builder)
+            for i, config_combination in enumerate(config_combinations):
+            # Generate time series data for the current combination
+                time_series_data = self.generate_time_series_data(config_combination)
+                #nifi.save_file(time_series_data,i,nifi_url)
+                data_saver.save_file(time_series_data, i, config)
+            #nifi= NifiSaver(self.builder)
+            #nifi_url="http://nifi:5000"
+            data_saver.save_meta_data(config)
+        elif data_saving["producer_type"] == "kafka":
+            config = data_saving["sink_name"]
+            att_id = data_saving["attribute_id"]
+            gen_id = data_saving["generator_id"]
+            data_producer=KafkaProducer()
+            data_consumer = KafkaConsumer(config)
+            for i, config_combination in enumerate(config_combinations):
+            # Generate time series data for the current combination
+                time_series_data = self.generate_time_series_data(config_combination)
+                data_producer.produce_time_series_to_kafka(time_series_data,config,gen_id,att_id)
+            data_consumer.consume_and_save()
+
+           
+

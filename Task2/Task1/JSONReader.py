@@ -54,11 +54,17 @@ class JSONReader(Reader):
             # Parse the JSON object
             json_object = json.loads(json_object)
             # Transform into the desired structure
-        
+
+            
+            # Extract "producer_type" and "sink_name"
+            producer_type = json_object.get("producer_type")
+            sink_name = json_object.get("sink_name")
+            
+      
             # Extract the datasets from the JSON object
             datasets = json_object.get("datasets", [])
-           
-
+            generator_id = datasets[0].get("generator_id")
+            attribute_id = datasets[0].get("attribute_id")
             # Determine daily and weekly seasonality based on seasonality components
             daily_seasonality_options = ["exist" if any(seasonality["frequency_type"] == "Daily" for seasonality in dataset["seasonality_components"]) else "no" for dataset in datasets]
             weekly_seasonality_options = ["exist" if any(seasonality["frequency_type"] == "Weekly" for seasonality in dataset["seasonality_components"]) else "no" for dataset in datasets]
@@ -70,6 +76,8 @@ class JSONReader(Reader):
                 "simulation_parameters": {
                     "start_date": start_date,
                     "end_date": end_date,
+                    "generator_id":generator_id ,
+                    "attribute_id":attribute_id,
                     "frequencies": [dataset["frequency"] for dataset in datasets],
                     "daily_seasonality_options": daily_seasonality_options,
                     "daily_amplitude": [seasonality["amplitude"] for dataset in datasets for seasonality in dataset["seasonality_components"]],
@@ -89,8 +97,13 @@ class JSONReader(Reader):
                     "missing_percentage": [dataset["missing_percentage"] for dataset in datasets],
                 }
             }
-
-            return desired_structure
+            saving_method={
+                "producer_type": producer_type,
+                "sink_name": sink_name,
+                "generator_id":generator_id ,
+                "attribute_id":attribute_id
+            }
+            return desired_structure,saving_method
         except Exception as e:
             print(f"Error parsing JSON object: {str(e)}")
             return {}

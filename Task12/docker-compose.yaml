@@ -1,0 +1,29 @@
+version: '3'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.1.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    networks:
+      - confluent
+
+  kafka:
+    image: confluentinc/cp-kafka:6.1.0
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_OFFSETS_TOPIC_PARTITIONS: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY: 0
+    volumes:
+      - ./output_data:/etc/kafka/secrets/output_data
+    depends_on:
+      - zookeeper
+    networks:
+      - confluent
+
+networks:
+  confluent:
+    external: true
