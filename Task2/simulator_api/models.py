@@ -36,6 +36,7 @@ class SimulatorDetail(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='submitted')
     start_date = models.DateField()
     end_date = models.DateField()
+    scheduler = models.IntegerField(default=1) 
     name = models.CharField(max_length=255)
     sink_name = models.CharField(max_length=255,default='./Task1/sample_datasets/')
     time_series_type = models.CharField(max_length=20, choices=TIME_SERIES_TYPES)

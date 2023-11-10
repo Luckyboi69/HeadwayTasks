@@ -30,6 +30,7 @@ def create_simulator(request):
 
     # Extract simulator data from the JSON request.
     name = data.get("name")
+    scheduler= data.get("scheduler")
     start_date = data.get("start_date")
     end_date = data.get("end_date")
     time_series_type = data.get("type")
@@ -41,6 +42,7 @@ def create_simulator(request):
         name=name,
         start_date=start_date,
         end_date=end_date,
+        scheduler=scheduler,
         time_series_type=time_series_type,
         sink_name=sink_name,
         producer_type=producer_type,
@@ -198,6 +200,7 @@ def get_simulator_data(simulator_id):
         # Access related data
         name = simulator.name
         status = simulator.status
+        scheduler = simulator.scheduler
         sink_name = simulator.sink_name
         producer_type= simulator.producer_type
         start_date = simulator.start_date.strftime("%Y-%m-%d")
@@ -208,6 +211,7 @@ def get_simulator_data(simulator_id):
         # Create a data structure to store all associated data
         data = {
             'name': name,
+            'scheduler': scheduler,
             'sink_name':sink_name,
             'producer_type': producer_type,
             'start_date': start_date,
@@ -296,7 +300,7 @@ def run_simulator(request):
         simulator_id=data.get("id") 
         simulator = SimulatorDetail.objects.get(id=simulator_id)
      
-        if simulator.status == "Submitted":
+        if simulator.status == "Submitted" or simulator.status == "Completed" or simulator.status == "Failed":
             simulator.status = "Running"
             simulator.save()  # Update the status to "Running" in the database
         if simulator.status == "Running":
