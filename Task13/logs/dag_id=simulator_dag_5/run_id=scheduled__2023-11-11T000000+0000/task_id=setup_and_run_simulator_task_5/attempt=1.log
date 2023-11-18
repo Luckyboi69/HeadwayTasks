@@ -1,0 +1,28 @@
+[2023-11-12T19:47:57.208+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5 permission to 509
+[2023-11-12T19:47:57.214+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5'
+[2023-11-12T19:47:57.322+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5 permission to 509
+[2023-11-12T19:47:57.330+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5'
+[2023-11-12T19:47:57.461+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_5.setup_and_run_simulator_task_5 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T19:47:57.498+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_5.setup_and_run_simulator_task_5 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T19:47:57.500+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-12T19:47:57.553+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_5> on 2023-11-11 00:00:00+00:00
+[2023-11-12T19:47:57.571+0000] {standard_task_runner.py:57} INFO - Started process 1992 to run task
+[2023-11-12T19:47:57.584+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_5', 'setup_and_run_simulator_task_5', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '19', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmp9fbtiwzx']
+[2023-11-12T19:47:57.598+0000] {standard_task_runner.py:85} INFO - Job 19: Subtask setup_and_run_simulator_task_5
+[2023-11-12T19:47:57.798+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5 permission to 509
+[2023-11-12T19:47:57.800+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_5/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_5'
+[2023-11-12T19:47:57.811+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_5.setup_and_run_simulator_task_5 scheduled__2023-11-11T00:00:00+00:00 [running]> on host e15777c5c324
+[2023-11-12T19:47:58.438+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_5' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_5' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T19:47:58.479+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 55, in setup_and_run_simulator
+    os.chdir(working_directory)
+NotADirectoryError: [Errno 20] Not a directory: '/djangoapp/Task1/main.py'
+[2023-11-12T19:47:58.657+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=simulator_dag_5, task_id=setup_and_run_simulator_task_5, execution_date=20231111T000000, start_date=20231112T194757, end_date=20231112T194758
+[2023-11-12T19:47:58.760+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 19 for task setup_and_run_simulator_task_5 ([Errno 20] Not a directory: '/djangoapp/Task1/main.py'; 1992)
+[2023-11-12T19:47:58.827+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-12T19:47:58.913+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,46 @@
+[2023-11-14T00:08:23.231+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17 permission to 509
+[2023-11-14T00:08:23.233+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17'
+[2023-11-14T00:08:23.323+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17 permission to 509
+[2023-11-14T00:08:23.326+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17'
+[2023-11-14T00:08:23.387+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_17.setup_and_run_simulator_task_17 scheduled__2023-11-13T00:00:00+00:00 [queued]>
+[2023-11-14T00:08:23.408+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_17.setup_and_run_simulator_task_17 scheduled__2023-11-13T00:00:00+00:00 [queued]>
+[2023-11-14T00:08:23.409+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-14T00:08:23.447+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_17> on 2023-11-13 00:00:00+00:00
+[2023-11-14T00:08:23.461+0000] {standard_task_runner.py:57} INFO - Started process 13070 to run task
+[2023-11-14T00:08:23.478+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_17', 'setup_and_run_simulator_task_17', 'scheduled__2023-11-13T00:00:00+00:00', '--job-id', '163', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmpixuhbysd']
+[2023-11-14T00:08:23.506+0000] {standard_task_runner.py:85} INFO - Job 163: Subtask setup_and_run_simulator_task_17
+[2023-11-14T00:08:23.615+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17 permission to 509
+[2023-11-14T00:08:23.617+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_17/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_17'
+[2023-11-14T00:08:23.628+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_17.setup_and_run_simulator_task_17 scheduled__2023-11-13T00:00:00+00:00 [running]> on host 84c765240aba
+[2023-11-14T00:08:23.891+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_17' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_17' AIRFLOW_CTX_EXECUTION_DATE='2023-11-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-13T00:00:00+00:00'
+[2023-11-14T09:53:57.889+0000] {local_task_job_runner.py:205} ERROR - Heartbeat time limit exceeded!
+[2023-11-14T09:53:58.114+0000] {process_utils.py:131} INFO - Sending 15 to group 13070. PIDs of all processes in the group: [13074, 13070]
+[2023-11-14T09:53:58.236+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 13070
+[2023-11-14T09:53:58.698+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-11-14T09:53:59.062+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 54, in setup_and_run_simulator
+    trigger_run_simulator(simulator_data_dict, **kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 59, in trigger_run_simulator
+    trigger_simulator({"id": simulator_data_dict["id"]})
+  File "/djangoapp/simulator_api/views.py", line 314, in trigger_simulator
+    simulator_thread = threading.Thread(target=run_simulator_thread(dataset))
+  File "/djangoapp/simulator_api/views.py", line 299, in run_simulator_thread
+    stdout, stderr = process.communicate(input=data)
+  File "/usr/local/lib/python3.8/subprocess.py", line 1028, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/local/lib/python3.8/subprocess.py", line 1884, in _communicate
+    ready = selector.select(timeout)
+  File "/usr/local/lib/python3.8/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2023-11-14T09:54:00.231+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=simulator_dag_17, task_id=setup_and_run_simulator_task_17, execution_date=20231113T000000, start_date=20231114T000823, end_date=20231114T095400
+[2023-11-14T09:54:00.430+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 163 for task setup_and_run_simulator_task_17 (Task received SIGTERM signal; 13070)
+[2023-11-14T09:54:00.580+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=13074, status='terminated', started='00:08:22') (13074) terminated with exit code None
+[2023-11-14T09:54:00.607+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=13070, status='terminated', exitcode=1, started='00:08:22') (13070) terminated with exit code 1

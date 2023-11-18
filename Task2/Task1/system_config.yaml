@@ -15,7 +15,7 @@ data_reading:
 
 data_saving:
   producer_type: "folder"  # Specify the data saving method (folder, kafka, database, etc.)
-  sink_name: "./Task1/sample_datasets/"  # Specify the folder path for saving datasets
+  sink_name: "/Task1/sample_datasets/"  # Specify the folder path for saving datasets
   kafka_config:
     bootstrap_servers: ""
     sink_name: ""

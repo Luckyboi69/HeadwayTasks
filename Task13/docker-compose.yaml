@@ -50,8 +50,8 @@ x-airflow-common:
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.7.3}
-  # build: .
+  #image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.7.3}
+  build: .
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
@@ -77,6 +77,8 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    - /mnt/d/Users/youssef.medhat/Documents/GitHub/HeadwayTasks/Task2:/djangoapp
+  
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -94,6 +96,8 @@ services:
       POSTGRES_DB: airflow
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
+    networks:
+      - airflowtask
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 10s
@@ -105,6 +109,8 @@ services:
     image: redis:latest
     expose:
       - 6379
+    networks:
+      - airflowtask
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -124,6 +130,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
+    networks:
+      - airflowtask        
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
@@ -139,6 +147,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
+    networks:
+      - airflowtask      
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
@@ -157,6 +167,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
+    networks:
+      - airflowtask  
     environment:
       <<: *airflow-common-env
       # Required to handle warm shutdown of the celery workers properly
@@ -170,13 +182,15 @@ services:
 
   airflow-triggerer:
     <<: *airflow-common
-    command: triggerer
+    command: airflow triggerer
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
       interval: 30s
       timeout: 10s
       retries: 5
       start_period: 30s
+    networks:
+      - airflowtask  
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
@@ -187,6 +201,8 @@ services:
     <<: *airflow-common
     entrypoint: /bin/bash
     # yamllint disable rule:line-length
+    networks:
+      - airflowtask    
     command:
       - -c
       - |
@@ -295,6 +311,9 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
-
+networks:
+  airflowtask:
+    external:
+      name: airflowtask
 volumes:
   postgres-db-volume:

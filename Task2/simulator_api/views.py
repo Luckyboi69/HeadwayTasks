@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
+from django.db import transaction
+from simulator_api.models import SimulatorDetail
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from rest_framework.decorators import api_view
@@ -10,6 +12,8 @@ import json
 import uuid
 import subprocess
 import os
+import logging
+logger = logging.getLogger(__name__)
 @api_view(['POST'])
 def create_simulator(request):
     """
@@ -269,6 +273,54 @@ def get_simulator_data(simulator_id):
     except SimulatorDetail.DoesNotExist:
         return JsonResponse({"message": f"Simulator with ID {simulator_id} does not exist"}, status=404)
 
+def trigger_simulator(data):
+    try:
+        simulator_id = data.get("id") 
+        simulator = get_object_or_404(SimulatorDetail, id=simulator_id)
+
+        if simulator.status == "Submitted" or simulator.status == "Completed" or simulator.status == "Failed":
+            simulator.status = "Running"
+            simulator.save()  # Update the status to "Running" in the database
+        if simulator.status == "Running":
+                # Define a function to run the simulator in a separate thread
+
+            dataset = get_simulator_data(simulator_id)
+            def run_simulator_thread(data):
+                #json_data = json.dumps(data)
+                process = subprocess.Popen(['python', '/djangoapp/Task1/main.py'],
+                           stdin=subprocess.PIPE, 
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE,
+                           text=True)
+                process_id = process.pid
+                simulator.process_id = str(process_id)
+                simulator.save()
+
+                stdout, stderr = process.communicate(input=data)
+                print("Standard Output:", stdout)
+                print("Standard Error:", stderr)
+
+
+                print("this is my stattututututs",process.returncode)
+                # Update the simulator status based on the process return code
+                if process.returncode == 0:
+                    simulator.status = "Completed"
+                else:
+                    simulator.status = "Failed"
+                #simulator.process_id = process_id
+                simulator.save()  # Update the status in the database
+
+            # Create and start a thread to run the simulator
+            simulator_thread = threading.Thread(target=run_simulator_thread(dataset))
+            print("this is hiiiim", simulator_thread)
+            simulator_thread.start()
+
+            return JsonResponse({"message": "Simulator started"})
+        else:
+            return JsonResponse({"message": "Simulator is not in 'Submitted' status"}, status=400)
+
+    except SimulatorDetail.DoesNotExist:
+        return JsonResponse({"message": f"Simulator with ID {simulator_id} does not exist"}, status=404)
 
 @api_view(['POST'])
 def run_simulator(request):
@@ -293,48 +345,20 @@ def run_simulator(request):
         - The simulator's process ID is saved in the database for reference.
         - The simulator status is updated based on the process return code ('Completed' or 'Failed').
     """    
-    try:
         # Logic to run a simulator by its ID.
         # Query the SimulatorDetail model by ID
-        data=request.data
-        simulator_id=data.get("id") 
-        simulator = SimulatorDetail.objects.get(id=simulator_id)
-     
-        if simulator.status == "Submitted" or simulator.status == "Completed" or simulator.status == "Failed":
-            simulator.status = "Running"
-            simulator.save()  # Update the status to "Running" in the database
-        if simulator.status == "Running":
-            # Define a function to run the simulator in a separate thread
+    try:    
+        data = request.data
+        trigger_simulator(data)
+        logger.info("Simulator triggered successfully.")
 
-            dataset = get_simulator_data(simulator_id)
-            def run_simulator_thread(data):
-                #json_data = json.dumps(data)
-                process = subprocess.Popen(['python', 'Task1/main.py'], stdin=subprocess.PIPE, text=True)
-                process_id = process.pid
-                simulator.process_id = str(process_id)
-                simulator.save()
-                process.communicate(input=data)
-
-                # Update the simulator status based on the process return code
-                if process.returncode == 0:
-                    simulator.status = "Completed"
-                else:
-                    simulator.status = "Failed"
-                #simulator.process_id = process_id
-                simulator.save()  # Update the status in the database
-
-            # Create and start a thread to run the simulator
-            simulator_thread = threading.Thread(target=run_simulator_thread(dataset))
-            simulator_thread.start()
-
-            return JsonResponse({"message": "Simulator started"})
-        else:
-            return JsonResponse({"message": "Simulator is not in 'Submitted' status"}, status=400)
-
-    except SimulatorDetail.DoesNotExist:
-        return JsonResponse({"message": f"Simulator with ID {simulator_id} does not exist"}, status=404)
-
-
+        return JsonResponse({"message": "Simulator started"})
+    except SimulatorDetail.DoesNotExist as e:
+        logger.error(f"Simulator does not exist. Error: {e}")
+        return JsonResponse({"message": "Simulator does not exist"}, status=404)
+    except Exception as e:
+        logger.error(f"Error while triggering simulator. Error: {e}")
+        return JsonResponse({"message": "Error triggering simulator"}, status=500)
 
 @api_view(['POST'])
 def stop_simulator(request):

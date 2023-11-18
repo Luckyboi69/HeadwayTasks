@@ -1,0 +1,22 @@
+[2023-11-12T21:32:39.166+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19 permission to 509
+[2023-11-12T21:32:39.168+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19'
+[2023-11-12T21:32:39.210+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19 permission to 509
+[2023-11-12T21:32:39.211+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19'
+[2023-11-12T21:32:39.249+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_19.setup_and_run_simulator_task_19 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T21:32:39.261+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_19.setup_and_run_simulator_task_19 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T21:32:39.262+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-12T21:32:39.279+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_19> on 2023-11-11 00:00:00+00:00
+[2023-11-12T21:32:39.285+0000] {standard_task_runner.py:57} INFO - Started process 571 to run task
+[2023-11-12T21:32:39.290+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_19', 'setup_and_run_simulator_task_19', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '46', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmpq3yo1isj']
+[2023-11-12T21:32:39.295+0000] {standard_task_runner.py:85} INFO - Job 46: Subtask setup_and_run_simulator_task_19
+[2023-11-12T21:32:39.370+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19 permission to 509
+[2023-11-12T21:32:39.371+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_19/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_19'
+[2023-11-12T21:32:39.377+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_19.setup_and_run_simulator_task_19 scheduled__2023-11-11T00:00:00+00:00 [running]> on host 84c765240aba
+[2023-11-12T21:32:39.466+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_19' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_19' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T21:32:39.664+0000] {logging_mixin.py:154} INFO - Standard Output: 
+[2023-11-12T21:32:39.665+0000] {logging_mixin.py:154} INFO - Standard Error: python: can't open file 'D:\Users\youssef.medhat\Documents\GitHub\HeadwayTasks\Task2\Task1\main.py': [Errno 2] No such file or directory
+[2023-11-12T21:32:39.669+0000] {logging_mixin.py:154} INFO - this is hiiiim <Thread(Thread-1, initial)>
+[2023-11-12T21:32:39.671+0000] {python.py:194} INFO - Done. Returned value was: None
+[2023-11-12T21:32:39.684+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=simulator_dag_19, task_id=setup_and_run_simulator_task_19, execution_date=20231111T000000, start_date=20231112T213239, end_date=20231112T213239
+[2023-11-12T21:32:39.749+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-11-12T21:32:39.766+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

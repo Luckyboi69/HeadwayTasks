@@ -1,0 +1,455 @@
+[2023-11-12T14:09:04.190+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:09:04.191+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:09:04.223+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:09:04.224+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:09:04.259+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:09:04.270+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:09:04.270+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-12T14:09:04.287+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_3> on 2023-11-11 00:00:00+00:00
+[2023-11-12T14:09:04.292+0000] {standard_task_runner.py:57} INFO - Started process 69 to run task
+[2023-11-12T14:09:04.296+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_3', 'setup_and_run_simulator_task_3', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '42', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmp_808sj46']
+[2023-11-12T14:09:04.300+0000] {standard_task_runner.py:85} INFO - Job 42: Subtask setup_and_run_simulator_task_3
+[2023-11-12T14:09:04.359+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:09:04.360+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:09:04.366+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [running]> on host 4bc8bf47bb6b
+[2023-11-12T14:09:04.454+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_3' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_3' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T14:09:04.461+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0011931d30>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011931d30>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 51, in setup_and_run_simulator
+    trigger_run_simulator(simulator_data_dict, **kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 61, in trigger_run_simulator
+    response = requests.post(api_endpoint, json={"id": simulator_data_dict["id"]})
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011931d30>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2023-11-12T14:09:04.479+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=simulator_dag_3, task_id=setup_and_run_simulator_task_3, execution_date=20231111T000000, start_date=20231112T140904, end_date=20231112T140904
+[2023-11-12T14:09:04.492+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 42 for task setup_and_run_simulator_task_3 (HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011931d30>: Failed to establish a new connection: [Errno 111] Connection refused')); 69)
+[2023-11-12T14:09:04.535+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-12T14:09:04.554+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-11-12T14:27:08.412+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:27:08.414+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:27:08.445+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:27:08.446+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:27:08.481+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:27:08.491+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:27:08.492+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-12T14:27:08.512+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_3> on 2023-11-11 00:00:00+00:00
+[2023-11-12T14:27:08.518+0000] {standard_task_runner.py:57} INFO - Started process 368 to run task
+[2023-11-12T14:27:08.522+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_3', 'setup_and_run_simulator_task_3', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '45', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmpdf94ngtk']
+[2023-11-12T14:27:08.527+0000] {standard_task_runner.py:85} INFO - Job 45: Subtask setup_and_run_simulator_task_3
+[2023-11-12T14:27:08.585+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:27:08.586+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:27:08.591+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [running]> on host 4bc8bf47bb6b
+[2023-11-12T14:27:08.686+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_3' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_3' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T14:27:08.693+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0011a84910>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a84910>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 51, in setup_and_run_simulator
+    trigger_run_simulator(simulator_data_dict, **kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 61, in trigger_run_simulator
+    response = requests.post(api_endpoint, json={"id": simulator_data_dict["id"]})
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a84910>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2023-11-12T14:27:08.714+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=simulator_dag_3, task_id=setup_and_run_simulator_task_3, execution_date=20231111T000000, start_date=20231112T142708, end_date=20231112T142708
+[2023-11-12T14:27:08.734+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 45 for task setup_and_run_simulator_task_3 (HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a84910>: Failed to establish a new connection: [Errno 111] Connection refused')); 368)
+[2023-11-12T14:27:08.766+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-12T14:27:08.783+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-11-12T14:41:40.626+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:41:40.628+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:41:40.660+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:41:40.662+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:41:40.695+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:41:40.707+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:41:40.708+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-12T14:41:40.725+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_3> on 2023-11-11 00:00:00+00:00
+[2023-11-12T14:41:40.730+0000] {standard_task_runner.py:57} INFO - Started process 609 to run task
+[2023-11-12T14:41:40.733+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_3', 'setup_and_run_simulator_task_3', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '54', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmpdre63_o_']
+[2023-11-12T14:41:40.736+0000] {standard_task_runner.py:85} INFO - Job 54: Subtask setup_and_run_simulator_task_3
+[2023-11-12T14:41:40.779+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:41:40.780+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:41:40.785+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [running]> on host 4bc8bf47bb6b
+[2023-11-12T14:41:40.862+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_3' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_3' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T14:41:40.869+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 53, in setup_and_run_simulator
+    trigger_run_simulator(simulator_data_dict, **kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 63, in trigger_run_simulator
+    response = requests.post(api_endpoint, json={"id": simulator_data_dict["id"]})
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2023-11-12T14:41:40.886+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=simulator_dag_3, task_id=setup_and_run_simulator_task_3, execution_date=20231111T000000, start_date=20231112T144140, end_date=20231112T144140
+[2023-11-12T14:41:40.902+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 54 for task setup_and_run_simulator_task_3 (HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused')); 609)
+[2023-11-12T14:41:40.927+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-12T14:41:40.942+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-11-12T14:41:54.385+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:41:54.387+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:41:54.418+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:41:54.419+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:41:54.452+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:41:54.461+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:41:54.462+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-12T14:41:54.477+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_3> on 2023-11-11 00:00:00+00:00
+[2023-11-12T14:41:54.483+0000] {standard_task_runner.py:57} INFO - Started process 620 to run task
+[2023-11-12T14:41:54.487+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_3', 'setup_and_run_simulator_task_3', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '55', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmp0x8qdtih']
+[2023-11-12T14:41:54.490+0000] {standard_task_runner.py:85} INFO - Job 55: Subtask setup_and_run_simulator_task_3
+[2023-11-12T14:41:54.541+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:41:54.542+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:41:54.548+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [running]> on host 4bc8bf47bb6b
+[2023-11-12T14:41:54.655+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_3' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_3' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T14:41:54.668+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 53, in setup_and_run_simulator
+    trigger_run_simulator(simulator_data_dict, **kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 63, in trigger_run_simulator
+    response = requests.post(api_endpoint, json={"id": simulator_data_dict["id"]})
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2023-11-12T14:41:54.694+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=simulator_dag_3, task_id=setup_and_run_simulator_task_3, execution_date=20231111T000000, start_date=20231112T144154, end_date=20231112T144154
+[2023-11-12T14:41:54.721+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 55 for task setup_and_run_simulator_task_3 (HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused')); 620)
+[2023-11-12T14:41:54.767+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-12T14:41:54.804+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-11-12T14:51:20.691+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:51:20.695+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:51:20.750+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:51:20.752+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:51:20.820+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:51:20.838+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T14:51:20.839+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-12T14:51:20.872+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_3> on 2023-11-11 00:00:00+00:00
+[2023-11-12T14:51:20.886+0000] {standard_task_runner.py:57} INFO - Started process 785 to run task
+[2023-11-12T14:51:20.893+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_3', 'setup_and_run_simulator_task_3', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '60', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmp0bopyfjj']
+[2023-11-12T14:51:20.900+0000] {standard_task_runner.py:85} INFO - Job 60: Subtask setup_and_run_simulator_task_3
+[2023-11-12T14:51:21.153+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T14:51:21.189+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T14:51:21.202+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [running]> on host 4bc8bf47bb6b
+[2023-11-12T14:51:21.395+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_3' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_3' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T14:51:21.411+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 53, in setup_and_run_simulator
+    trigger_run_simulator(simulator_data_dict, **kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 63, in trigger_run_simulator
+    response = requests.post(api_endpoint, json={"id": simulator_data_dict["id"]})
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[2023-11-12T14:51:21.451+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=simulator_dag_3, task_id=setup_and_run_simulator_task_3, execution_date=20231111T000000, start_date=20231112T145120, end_date=20231112T145121
+[2023-11-12T14:51:21.486+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 60 for task setup_and_run_simulator_task_3 (HTTPConnectionPool(host='localhost', port=8085): Max retries exceeded with url: /run_simulator/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0011a85940>: Failed to establish a new connection: [Errno 111] Connection refused')); 785)
+[2023-11-12T14:51:21.558+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-12T14:51:21.596+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2023-11-12T19:31:03.053+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T19:31:03.059+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T19:31:03.111+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T19:31:03.114+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T19:31:03.176+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T19:31:03.199+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T19:31:03.200+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-12T19:31:03.234+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_3> on 2023-11-11 00:00:00+00:00
+[2023-11-12T19:31:03.246+0000] {standard_task_runner.py:57} INFO - Started process 1761 to run task
+[2023-11-12T19:31:03.256+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_3', 'setup_and_run_simulator_task_3', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmp8sdjb6se']
+[2023-11-12T19:31:03.264+0000] {standard_task_runner.py:85} INFO - Job 15: Subtask setup_and_run_simulator_task_3
+[2023-11-12T19:31:03.363+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509
+[2023-11-12T19:31:03.364+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_3/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_3'
+[2023-11-12T19:31:03.371+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_3.setup_and_run_simulator_task_3 scheduled__2023-11-11T00:00:00+00:00 [running]> on host e15777c5c324
+[2023-11-12T19:31:03.543+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_3' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_3' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T19:31:03.596+0000] {python.py:194} INFO - Done. Returned value was: None
+[2023-11-12T19:31:03.611+0000] {logging_mixin.py:154} INFO - Simulator process ID: 1763
+[2023-11-12T19:31:03.628+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=simulator_dag_3, task_id=setup_and_run_simulator_task_3, execution_date=20231111T000000, start_date=20231112T193103, end_date=20231112T193103
+[2023-11-12T19:31:03.722+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-11-12T19:31:03.786+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

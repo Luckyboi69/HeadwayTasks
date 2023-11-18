@@ -15,10 +15,13 @@ from DatabaseReader import DatabaseReader
 from JSONReader import JSONReader
 import sys
 import json
-
+import os
 random.seed(22)  
 def main():
-    with open("./Task1/system_config.yaml", "r") as config_file:
+    script_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(script_directory, "system_config.yaml")
+
+    with open(config_file_path, "r") as config_file:
         system_config = yaml.safe_load(config_file)
     
     data_reading_method = system_config["data_reading"]["method"]

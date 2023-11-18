@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8fh(h$traa4v6#3p!hyhk(s$3d&o1^xfdy__yl2ujt9*)6fg9q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'simulator_api',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",  # Airflow web server address
+]
+
 
 ROOT_URLCONF = 'Task2.urls'
 
@@ -82,7 +89,7 @@ DATABASES = {
         'USER': 'youssefmedhat',
         'PASSWORD': '12345678',
         'HOST': 'db', 
-        'PORT': '',  
+        'PORT': '5432',  
     }
 }
 

@@ -1,6 +1,6 @@
 from Saver import Saver
 import pandas as pd
-
+import os
 class FolderSaver(Saver):
     """
     A concrete producer class that saves files and metadata to a folder.
@@ -32,7 +32,13 @@ class FolderSaver(Saver):
         Returns:
             bool: True if the file is successfully saved, False otherwise.
         """
-        df = df.to_csv(path + str(counter + 1) + '.csv', encoding='utf-8', index=False)
+        script_directory = os.path.dirname(os.path.abspath(__file__))
+        
+        config_file_path = os.path.join(script_directory, path)
+
+
+  
+        df = df.to_csv(config_file_path + str(counter + 1) + '.csv', encoding='utf-8', index=False)
         self.meta_data.append({
             'id': str(counter + 1) + '.csv',
             'daily_seasonality': self.builder.time_series_product.daily_seasonality_options,
@@ -52,5 +58,7 @@ class FolderSaver(Saver):
         Args:
             path (str): The path where the metadata file should be saved.
         """
+        script_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.abspath(os.path.join(script_directory, path))
         meta_data_df = pd.DataFrame.from_records(self.meta_data)
-        meta_data_df.to_csv(path + '/meta_data.csv', encoding='utf-8', index=False)
+        meta_data_df.to_csv(config_file_path + '/meta_data.csv', encoding='utf-8', index=False)

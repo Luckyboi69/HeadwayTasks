@@ -1,0 +1,41 @@
+[2023-11-12T22:27:29.842+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31 permission to 509
+[2023-11-12T22:27:29.844+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31'
+[2023-11-12T22:27:29.885+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31 permission to 509
+[2023-11-12T22:27:29.889+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31'
+[2023-11-12T22:27:29.930+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_31.setup_and_run_simulator_task_31 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T22:27:29.943+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_31.setup_and_run_simulator_task_31 scheduled__2023-11-11T00:00:00+00:00 [queued]>
+[2023-11-12T22:27:29.944+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-12T22:27:29.961+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_31> on 2023-11-11 00:00:00+00:00
+[2023-11-12T22:27:29.971+0000] {standard_task_runner.py:57} INFO - Started process 671 to run task
+[2023-11-12T22:27:29.976+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_31', 'setup_and_run_simulator_task_31', 'scheduled__2023-11-11T00:00:00+00:00', '--job-id', '64', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmpndb1m09f']
+[2023-11-12T22:27:29.980+0000] {standard_task_runner.py:85} INFO - Job 64: Subtask setup_and_run_simulator_task_31
+[2023-11-12T22:27:30.063+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31 permission to 509
+[2023-11-12T22:27:30.064+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_31/run_id=scheduled__2023-11-11T00:00:00+00:00/task_id=setup_and_run_simulator_task_31'
+[2023-11-12T22:27:30.071+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_31.setup_and_run_simulator_task_31 scheduled__2023-11-11T00:00:00+00:00 [running]> on host 84c765240aba
+[2023-11-12T22:27:30.186+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_31' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_31' AIRFLOW_CTX_EXECUTION_DATE='2023-11-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-11T00:00:00+00:00'
+[2023-11-12T22:27:33.458+0000] {logging_mixin.py:154} INFO - Standard Output: File 'TimeSeries_daily_exist_weekly_exist_noise_small_trend_exist_cycle_exist_outliers_5%_freq_1H_missing_6%.csv' generated.
+[2023-11-12T22:27:33.459+0000] {logging_mixin.py:154} INFO - Standard Error: Traceback (most recent call last):
+  File "/djangoapp/Task1/main.py", line 74, in <module>
+    main()
+  File "/djangoapp/Task1/main.py", line 69, in main
+    director.generate_multiple_datasets(config_attributes,data_saving)
+  File "/djangoapp/Task1/TimeSeriesDirector.py", line 130, in generate_multiple_datasets
+    data_saver.save_file(time_series_data, i, config)
+  File "/djangoapp/Task1/FolderSaver.py", line 37, in save_file
+    df = df.to_csv(file_path + str(counter + 1) + '.csv', encoding='utf-8', index=False)
+  File "/home/***/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 3772, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/home/***/.local/lib/python3.8/site-packages/pandas/io/formats/format.py", line 1186, in to_csv
+    csv_formatter.save()
+  File "/home/***/.local/lib/python3.8/site-packages/pandas/io/formats/csvs.py", line 240, in save
+    with get_handle(
+  File "/home/***/.local/lib/python3.8/site-packages/pandas/io/common.py", line 737, in get_handle
+    check_parent_directory(str(handle))
+  File "/home/***/.local/lib/python3.8/site-packages/pandas/io/common.py", line 600, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: 'djangoapp'
+[2023-11-12T22:27:33.463+0000] {logging_mixin.py:154} INFO - this is hiiiim <Thread(Thread-1, initial)>
+[2023-11-12T22:27:33.465+0000] {python.py:194} INFO - Done. Returned value was: None
+[2023-11-12T22:27:33.482+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=simulator_dag_31, task_id=setup_and_run_simulator_task_31, execution_date=20231111T000000, start_date=20231112T222729, end_date=20231112T222733
+[2023-11-12T22:27:33.553+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-11-12T22:27:33.592+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

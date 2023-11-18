@@ -10,6 +10,9 @@ services:
     networks:
       - nifi_network
       - confluent
+      - airflowtask
+    ports:
+      - "5432:5432"   
   web:
     build:
       context: .
@@ -26,8 +29,12 @@ services:
     networks:
       - nifi_network
       - confluent
+      - airflowtask
 
+    
 networks:
+  airflowtask:
+    external: true
   confluent:
     external: true
   nifi_network:

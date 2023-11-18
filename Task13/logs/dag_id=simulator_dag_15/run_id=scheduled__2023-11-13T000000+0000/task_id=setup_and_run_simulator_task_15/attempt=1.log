@@ -1,0 +1,145 @@
+[2023-11-14T00:08:22.629+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15 permission to 509
+[2023-11-14T00:08:22.641+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15'
+[2023-11-14T00:08:22.796+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15 permission to 509
+[2023-11-14T00:08:22.798+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15'
+[2023-11-14T00:08:22.889+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simulator_dag_15.setup_and_run_simulator_task_15 scheduled__2023-11-13T00:00:00+00:00 [queued]>
+[2023-11-14T00:08:22.912+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simulator_dag_15.setup_and_run_simulator_task_15 scheduled__2023-11-13T00:00:00+00:00 [queued]>
+[2023-11-14T00:08:22.914+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2023-11-14T00:08:22.961+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): setup_and_run_simulator_task_15> on 2023-11-13 00:00:00+00:00
+[2023-11-14T00:08:22.980+0000] {standard_task_runner.py:57} INFO - Started process 13061 to run task
+[2023-11-14T00:08:22.998+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'simulator_dag_15', 'setup_and_run_simulator_task_15', 'scheduled__2023-11-13T00:00:00+00:00', '--job-id', '162', '--raw', '--subdir', 'DAGS_FOLDER/timeseries.py', '--cfg-path', '/tmp/tmph9afgqe2']
+[2023-11-14T00:08:23.006+0000] {standard_task_runner.py:85} INFO - Job 162: Subtask setup_and_run_simulator_task_15
+[2023-11-14T00:08:23.150+0000] {logging_mixin.py:154} INFO - Changing /opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15 permission to 509
+[2023-11-14T00:08:23.154+0000] {logging_mixin.py:154} INFO - Failed to change /opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15 permission to 509: [Errno 1] Operation not permitted: '/opt/***/logs/dag_id=simulator_dag_15/run_id=scheduled__2023-11-13T00:00:00+00:00/task_id=setup_and_run_simulator_task_15'
+[2023-11-14T00:08:23.180+0000] {task_command.py:416} INFO - Running <TaskInstance: simulator_dag_15.setup_and_run_simulator_task_15 scheduled__2023-11-13T00:00:00+00:00 [running]> on host 84c765240aba
+[2023-11-14T00:08:23.419+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simulator_dag_15' AIRFLOW_CTX_TASK_ID='setup_and_run_simulator_task_15' AIRFLOW_CTX_EXECUTION_DATE='2023-11-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-11-13T00:00:00+00:00'
+[2023-11-14T00:09:56.315+0000] {job.py:219} ERROR - Job heartbeat got an exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "postgres" to address: Temporary failure in name resolution
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/jobs/job.py", line 190, in heartbeat
+    session.merge(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3056, in merge
+    return self._merge(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3136, in _merge
+    merged = self.get(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2853, in get
+    return self._get_impl(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2975, in _get_impl
+    return db_load_fn(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 530, in load_on_pk_identity
+    session.execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1716, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 750, in _connection_for_bind
+    conn = bind.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/future/engine.py", line 406, in connect
+    return super(Engine, self).connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/impl.py", line 256, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 691, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate host name "postgres" to address: Temporary failure in name resolution
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2023-11-14T09:53:57.465+0000] {local_task_job_runner.py:205} ERROR - Heartbeat time limit exceeded!
+[2023-11-14T09:53:57.742+0000] {process_utils.py:131} INFO - Sending 15 to group 13061. PIDs of all processes in the group: [13069, 13061]
+[2023-11-14T09:53:57.959+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 13061
+[2023-11-14T09:53:58.101+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-11-14T09:53:59.078+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 54, in setup_and_run_simulator
+    trigger_run_simulator(simulator_data_dict, **kwargs)
+  File "/opt/airflow/dags/timeseries.py", line 59, in trigger_run_simulator
+    trigger_simulator({"id": simulator_data_dict["id"]})
+  File "/djangoapp/simulator_api/views.py", line 314, in trigger_simulator
+    simulator_thread = threading.Thread(target=run_simulator_thread(dataset))
+  File "/djangoapp/simulator_api/views.py", line 299, in run_simulator_thread
+    stdout, stderr = process.communicate(input=data)
+  File "/usr/local/lib/python3.8/subprocess.py", line 1028, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/local/lib/python3.8/subprocess.py", line 1884, in _communicate
+    ready = selector.select(timeout)
+  File "/usr/local/lib/python3.8/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2023-11-14T09:54:00.344+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=simulator_dag_15, task_id=setup_and_run_simulator_task_15, execution_date=20231113T000000, start_date=20231114T000822, end_date=20231114T095400
+[2023-11-14T09:54:00.499+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 162 for task setup_and_run_simulator_task_15 (Task received SIGTERM signal; 13061)
+[2023-11-14T09:54:00.633+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=13069, status='terminated', started='00:08:22') (13069) terminated with exit code None
+[2023-11-14T09:54:00.732+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=13061, status='terminated', exitcode=1, started='00:08:22') (13061) terminated with exit code 1
