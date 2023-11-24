@@ -25,10 +25,6 @@ def predict():
         df,o,p= feature_extractor.extract_features(test_data,lags_value,intervals,features)
         df.drop('value',axis=1,inplace=True)
         last_value=df.tail(1)
-        print(last_value)
-        #print(last_value)
-        print("OOO",model_name)
-        print(test_data)
         next_value_pred = model.predict(last_value)
         # Perform prediction using the loaded model
         # Prepare the response

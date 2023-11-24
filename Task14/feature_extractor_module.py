@@ -40,6 +40,7 @@ class FeatureExtractor:
                         df[feature] = df['timestamp'].dt.hour
                     elif feature == 'DoM':
                         df[feature] = df['timestamp'].dt.day
+                        
         else:            
           df_time=df[['value','timestamp']]
           df_time['DoW'] = df['timestamp'].dt.dayofweek  # Day of week (Monday=0, Sunday=6)
@@ -96,7 +97,6 @@ class FeatureExtractor:
         df_1=df[['timestamp','value']].copy()
 
         df_1.rename(columns = {'value':'y', 'timestamp':'ds'}, inplace = True)
-
         # Instantiate the Prophet model
         model = Prophet()
 
@@ -111,12 +111,9 @@ class FeatureExtractor:
         prophet_features=forecast[['yhat_lower','yhat_upper','trend_lower','trend_upper']].copy()
         # Add features with correlation above the threshold to the DataFrame
         for col in prophet_features:
-            correlations = df['value'].corr(prophet_features[col], method='pearson')
-            if abs(correlations) > correlation_threshold:
                 df[col] = prophet_features[col]
         df.dropna(inplace=True)
         df.set_index('timestamp', inplace=True)
         if lagged_features==0:
             lagged_features=1
-    
         return df,lagged_features,data_interval
