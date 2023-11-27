@@ -1,0 +1,13 @@
+version: '3'
+services:
+  flask-app:
+    network_mode: "host"
+    build:
+      context: .
+      dockerfile: Dockerfile  # The name of your Dockerfile
+    command: bash -c "python app.py"  
+    ports:
+      - "5000:5000"  # Expose Flask app on port 5000
+    volumes:
+      - ./:/app  # Mount the models directory
+

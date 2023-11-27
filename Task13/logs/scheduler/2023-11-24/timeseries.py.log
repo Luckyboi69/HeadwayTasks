@@ -9832,3 +9832,465 @@ Traceback (most recent call last):
 django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
 [2023-11-24T22:43:44.191+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
 [2023-11-24T22:43:44.227+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 2.850 seconds
+[2023-11-24T22:44:14.949+0000] {processor.py:157} INFO - Started process (PID=9059) to work on /opt/airflow/dags/timeseries.py
+[2023-11-24T22:44:14.951+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/timeseries.py for tasks to queue
+[2023-11-24T22:44:14.956+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:44:14.955+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:44:18.105+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:44:18.089+0000] {dagbag.py:346} ERROR - Failed to import: /opt/airflow/dags/timeseries.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 342, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/timeseries.py", line 20, in <module>
+    simulators_data = list(SimulatorDetail.objects.all().values())
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 208, in __iter__
+    for row in compiler.results_iter(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1513, in results_iter
+    results = self.execute_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
+[2023-11-24T22:44:18.117+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:44:18.157+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 3.211 seconds
+[2023-11-24T22:44:49.004+0000] {processor.py:157} INFO - Started process (PID=9121) to work on /opt/airflow/dags/timeseries.py
+[2023-11-24T22:44:49.006+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/timeseries.py for tasks to queue
+[2023-11-24T22:44:49.009+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:44:49.008+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:44:53.611+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:44:53.597+0000] {dagbag.py:346} ERROR - Failed to import: /opt/airflow/dags/timeseries.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 342, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/timeseries.py", line 20, in <module>
+    simulators_data = list(SimulatorDetail.objects.all().values())
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 208, in __iter__
+    for row in compiler.results_iter(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1513, in results_iter
+    results = self.execute_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
+[2023-11-24T22:44:53.618+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:44:53.639+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 4.638 seconds
+[2023-11-24T22:45:23.712+0000] {processor.py:157} INFO - Started process (PID=9189) to work on /opt/airflow/dags/timeseries.py
+[2023-11-24T22:45:23.714+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/timeseries.py for tasks to queue
+[2023-11-24T22:45:23.717+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:45:23.717+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:45:26.599+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:45:26.589+0000] {dagbag.py:346} ERROR - Failed to import: /opt/airflow/dags/timeseries.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 342, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/timeseries.py", line 20, in <module>
+    simulators_data = list(SimulatorDetail.objects.all().values())
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 208, in __iter__
+    for row in compiler.results_iter(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1513, in results_iter
+    results = self.execute_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
+[2023-11-24T22:45:26.605+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:45:26.627+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 2.919 seconds
+[2023-11-24T22:45:56.771+0000] {processor.py:157} INFO - Started process (PID=9256) to work on /opt/airflow/dags/timeseries.py
+[2023-11-24T22:45:56.774+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/timeseries.py for tasks to queue
+[2023-11-24T22:45:56.777+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:45:56.776+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:45:59.563+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:45:59.549+0000] {dagbag.py:346} ERROR - Failed to import: /opt/airflow/dags/timeseries.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 342, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/timeseries.py", line 20, in <module>
+    simulators_data = list(SimulatorDetail.objects.all().values())
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 208, in __iter__
+    for row in compiler.results_iter(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1513, in results_iter
+    results = self.execute_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
+[2023-11-24T22:45:59.573+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:45:59.614+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 2.846 seconds
+[2023-11-24T22:46:30.040+0000] {processor.py:157} INFO - Started process (PID=9315) to work on /opt/airflow/dags/timeseries.py
+[2023-11-24T22:46:30.043+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/timeseries.py for tasks to queue
+[2023-11-24T22:46:30.046+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:46:30.046+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:46:33.090+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:46:33.078+0000] {dagbag.py:346} ERROR - Failed to import: /opt/airflow/dags/timeseries.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 342, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/timeseries.py", line 20, in <module>
+    simulators_data = list(SimulatorDetail.objects.all().values())
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 208, in __iter__
+    for row in compiler.results_iter(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1513, in results_iter
+    results = self.execute_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
+[2023-11-24T22:46:33.099+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:46:33.117+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 3.080 seconds
+[2023-11-24T22:47:43.646+0000] {processor.py:157} INFO - Started process (PID=34) to work on /opt/airflow/dags/timeseries.py
+[2023-11-24T22:47:43.651+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/timeseries.py for tasks to queue
+[2023-11-24T22:47:43.657+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:47:43.656+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:47:47.501+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:47:47.476+0000] {dagbag.py:346} ERROR - Failed to import: /opt/airflow/dags/timeseries.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 342, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/timeseries.py", line 20, in <module>
+    simulators_data = list(SimulatorDetail.objects.all().values())
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 208, in __iter__
+    for row in compiler.results_iter(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1513, in results_iter
+    results = self.execute_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
+[2023-11-24T22:47:47.508+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:47:47.541+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 3.904 seconds
+[2023-11-24T22:48:18.109+0000] {processor.py:157} INFO - Started process (PID=100) to work on /opt/airflow/dags/timeseries.py
+[2023-11-24T22:48:18.111+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/timeseries.py for tasks to queue
+[2023-11-24T22:48:18.115+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:48:18.114+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:48:20.992+0000] {logging_mixin.py:154} INFO - [2023-11-24T22:48:20.980+0000] {dagbag.py:346} ERROR - Failed to import: /opt/airflow/dags/timeseries.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db" to address: Name or service not known
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 342, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/timeseries.py", line 20, in <module>
+    simulators_data = list(SimulatorDetail.objects.all().values())
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/query.py", line 208, in __iter__
+    for row in compiler.results_iter(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1513, in results_iter
+    results = self.execute_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 330, in cursor
+    return self._cursor()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 306, in _cursor
+    self.ensure_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: could not translate host name "db" to address: Name or service not known
+[2023-11-24T22:48:20.997+0000] {processor.py:841} WARNING - No viable dags retrieved from /opt/airflow/dags/timeseries.py
+[2023-11-24T22:48:21.015+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/timeseries.py took 2.910 seconds
