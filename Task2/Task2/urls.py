@@ -16,13 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls import path
+from django.urls import include
 from simulator_api import views
+from django.views.decorators.csrf import csrf_exempt
+
+from simulator_api.schema import schema
+from graphene_django.views import GraphQLView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create_simulator/', views.create_simulator, name='create_simulator'),
     path('list_simulators/', views.list_simulators, name='list_simulators'),
     path('run_simulator/', views.run_simulator, name='run_simulator'),
     path('stop_simulator/', views.stop_simulator, name='stop_simulator'),
+    path("graphql/",csrf_exempt(GraphQLView.as_view(graphiql=True,schema=schema)))
 ]
 

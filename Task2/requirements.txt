@@ -8,3 +8,4 @@ scikit-learn
 requests
 confluent-kafka
 django-cors-headers
+graphene-django
