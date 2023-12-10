@@ -29,9 +29,6 @@ def predict():
         test_df = pd.read_csv(test_dataset_path)
         test_df['timestamp'] = pd.to_datetime(test_df['timestamp'])
 
-        # Extract features for a subset of the test data
-        # Consider the last 'lags' rows for prediction
-        end_timestamp = test_df.iloc[-1]['timestamp']
         intervals = int(intervals)  # Convert 'intervals' to an integer if it's a string
         lags = int(lags)
         start_index = test_df[test_df['timestamp'] == start_timestamp].index[0]
@@ -44,7 +41,6 @@ def predict():
              
         # Make predictions
         predictions = model.predict(df)
-        df_js = df.to_json()
 
         # Prepare the response
         response = {
@@ -69,7 +65,7 @@ def load_model_from_mlflow(model_name):
         raise ValueError(f'No runs found for model {model_name}')
 
     # Load the model from the MLflow server using the artifact path
-    model_path = f"runs:/{run_id}/{model_name}"
+    model_path = f"./mlruns/0/{run_id}/artifacts/{model_name}"
     model = mlflow.sklearn.load_model(model_path)
 
     return model, lags, intervals, features

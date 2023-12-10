@@ -39,9 +39,6 @@ def train_and_save_model(file_name):
             model = LinearRegression()
             model.fit(X, y)
 
-             print(f"train_number: {train_number}")
-            print(f"lags: {lags}")
-            print(f"intervals: {intervals}")
             # Log parameters with MLflow
             mlflow.log_param("train_number", train_number)
             mlflow.log_param("number_of_lags", lags)
