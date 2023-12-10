@@ -1,0 +1,8 @@
+Flask
+numpy
+pandas
+scikit-learn
+statsmodels
+prophet
+plotly==5.0.0
+mlflow

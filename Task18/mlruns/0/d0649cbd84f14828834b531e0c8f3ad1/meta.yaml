@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Users/youssef.medhat/Documents/GitHub/HeadwayTasks/Task14/mlruns/0/d0649cbd84f14828834b531e0c8f3ad1/artifacts
+end_time: 1702167697754
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d0649cbd84f14828834b531e0c8f3ad1
+run_name: train_number_386
+run_uuid: d0649cbd84f14828834b531e0c8f3ad1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702167682371
+status: 3
+tags: []
+user_id: youssef.medhat
